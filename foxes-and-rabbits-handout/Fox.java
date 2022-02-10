@@ -26,6 +26,8 @@ public class Fox extends Animal
     private static final int RABBIT_FOOD_VALUE = 9;
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
+    // The spawn probability of fox
+    private static double Spawn_Probability = 0.02;
     
     // Individual characteristics (instance fields).
     // The fox's age.
@@ -52,6 +54,23 @@ public class Fox extends Animal
             age = 0;
             foodLevel = RABBIT_FOOD_VALUE;
         }
+    }
+    
+    /**
+     * Creates a useless Fox
+     */
+    public Fox()
+    {
+        
+    }
+    
+    /**
+     * This allows us to create a new animal
+     * @return Returns a reference of the animal we created
+     */
+    public Animal createAnimal(boolean randomAge, Field field, Location location)
+    {
+        return new Fox(randomAge, field, location);
     }
     
     /**
@@ -170,5 +189,13 @@ public class Fox extends Animal
     private boolean canBreed()
     {
         return age >= BREEDING_AGE;
+    }
+    
+    /**
+     * @return The probability of the rabbit spawning
+     */
+    public double getSpawn()
+    {
+        return Spawn_Probability;
     }
 }

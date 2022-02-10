@@ -21,10 +21,12 @@ public class Simulator
     // The probability that a fox will be created in any given grid position.
     private static final double FOX_CREATION_PROBABILITY = 0.02;
     // The probability that a rabbit will be created in any given grid position.
-    private static final double RABBIT_CREATION_PROBABILITY = 0.08;    
+    private static final double RABBIT_CREATION_PROBABILITY = 0.08;
 
     // List of animals in the field.
     private List<Animal> animals;
+    // List of animalTypes in the field
+    private List<Animal> animalTypes;
     // The current state of the field.
     private Field field;
     // The current step of the simulation.
@@ -55,12 +57,17 @@ public class Simulator
         }
         
         animals = new ArrayList<>();
+        animalTypes = new ArrayList<>();
         field = new Field(depth, width);
 
         // Create a view of the state of each location in the field.
         view = new SimulatorView(depth, width);
         view.setColor(Rabbit.class, Color.ORANGE);
         view.setColor(Fox.class, Color.BLUE);
+        
+        // Putting all animal types in the array
+        animalTypes.add(new Rabbit());
+        animalTypes.add(new Fox());
         
         // Setup a valid starting point.
         reset();
@@ -136,16 +143,22 @@ public class Simulator
         field.clear();
         for(int row = 0; row < field.getDepth(); row++) {
             for(int col = 0; col < field.getWidth(); col++) {
-                if(rand.nextDouble() <= FOX_CREATION_PROBABILITY) {
+                Animal animal = animalTypes.get(rand.nextInt(2));
+                if(rand.nextDouble() <= animal.getSpawn()) {
                     Location location = new Location(row, col);
-                    Fox fox = new Fox(true, field, location);
-                    animals.add(fox);
+                    animals.add(animal.createAnimal(true, field, location));
                 }
-                else if(rand.nextDouble() <= RABBIT_CREATION_PROBABILITY) {
-                    Location location = new Location(row, col);
-                    Rabbit rabbit = new Rabbit(true, field, location);
-                    animals.add(rabbit);
-                }
+                
+                // if(rand.nextDouble() <= FOX_CREATION_PROBABILITY) {
+                    // Location location = new Location(row, col);
+                    // Fox fox = new Fox(true, field, location);
+                    // animals.add(fox);
+                // }
+                // else if(rand.nextDouble() <= RABBIT_CREATION_PROBABILITY) {
+                    // Location location = new Location(row, col);
+                    // Rabbit rabbit = new Rabbit(true, field, location);
+                    // animals.add(rabbit);
+                // }
                 // else leave the location empty.
             }
         }

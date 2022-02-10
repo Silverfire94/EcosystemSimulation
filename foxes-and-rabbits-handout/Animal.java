@@ -29,6 +29,14 @@ public abstract class Animal
     }
     
     /**
+     * Creates a new animal for the animalTypes array
+     */
+    public Animal()
+    {
+        
+    }
+    
+    /**
      * Make this animal act - that is: make it do
      * whatever it wants/needs to do.
      * @param newAnimals A list to receive newly born animals.
@@ -88,4 +96,14 @@ public abstract class Animal
     {
         return field;
     }
+    
+    /**
+     * This return the probability of spawning the animal
+     */
+    abstract public double getSpawn();
+    
+    /**
+     * Alls the animal to create new animals
+     */
+    abstract public Animal createAnimal(boolean randomAge, Field field, Location location);
 }

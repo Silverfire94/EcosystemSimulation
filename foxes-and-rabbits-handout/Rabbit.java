@@ -22,6 +22,8 @@ public class Rabbit extends Animal
     private static final int MAX_LITTER_SIZE = 4;
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
+    // The spawn probability of Rabbit
+    private static double Spawn_Probability = 0.08;
     
     // Individual characteristics (instance fields).
     
@@ -43,6 +45,23 @@ public class Rabbit extends Animal
         if(randomAge) {
             age = rand.nextInt(MAX_AGE);
         }
+    }
+    
+    /**
+     * Creates a useless Rabbit
+     */
+    public Rabbit()
+    {
+        
+    }
+    
+    /**
+     * This allows us to create a new animal
+     * @return Returns a reference of the animal we created
+     */
+    public Animal createAnimal(boolean randomAge, Field field, Location location)
+    {
+        return new Rabbit(randomAge, field, location);
     }
     
     /**
@@ -119,5 +138,13 @@ public class Rabbit extends Animal
     private boolean canBreed()
     {
         return age >= BREEDING_AGE;
+    }
+    
+    /**
+     * @return The probability of the rabbit spawning
+     */
+    public double getSpawn()
+    {
+        return Spawn_Probability;
     }
 }
