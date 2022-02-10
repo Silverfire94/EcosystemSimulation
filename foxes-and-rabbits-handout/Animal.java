@@ -5,7 +5,10 @@ import java.util.List;
  * 
  * @author David J. Barnes and Michael Kölling
  * @version 2016.02.29 (2)
+<<<<<<< HEAD
  * sadvasv
+=======
+>>>>>>> origin/main
  */
 public abstract class Animal
 {
