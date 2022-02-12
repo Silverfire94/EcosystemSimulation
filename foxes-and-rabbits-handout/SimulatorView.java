@@ -69,10 +69,10 @@ public class SimulatorView extends JFrame
      * @param color The color to be used for the given class.
      */
     public void setColor(Class animalClass, Color color)
-    {
+    {   
         colors.put(animalClass, color);
     }
-
+    
     /**
      * Display a short information label at the top of the window.
      */

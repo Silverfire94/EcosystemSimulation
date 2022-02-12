@@ -20,11 +20,14 @@ public class Rabbit extends Animal
     private static final double BREEDING_PROBABILITY = 0.12;
     // The maximum number of births.
     private static final int MAX_LITTER_SIZE = 4;
+    
     // A shared random number generator to control breeding.
-    private static final Random rand = Randomizer.getRandom();
+    //private static final Random rand = Randomizer.getRandom();
+    
+    // The spawn probability of Rabbit
+    private static double Spawn_Probability = 0.08;
     
     // Individual characteristics (instance fields).
-    
     // The rabbit's age.
     private int age;
 
@@ -36,13 +39,28 @@ public class Rabbit extends Animal
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
-    public Rabbit(boolean randomAge, Field field, Location location)
+    public Rabbit(boolean randomAge,boolean male, Field field, Location location)
     {
-        super(field, location);
+        super(male, field, location);
         age = 0;
         if(randomAge) {
             age = rand.nextInt(MAX_AGE);
         }
+    }
+    
+    /**
+     * Another constructor for Rabbits. 
+     */
+    public Rabbit()
+    {}
+    
+    /**
+     * This allows us to create a new animal
+     * @return Returns a reference of the animal we created
+     */
+    public Animal createAnimal(boolean randomAge,boolean male, Field field, Location location)
+    {
+        return new Rabbit(randomAge, male, field, location);
     }
     
     /**
@@ -93,7 +111,7 @@ public class Rabbit extends Animal
         int births = breed();
         for(int b = 0; b < births && free.size() > 0; b++) {
             Location loc = free.remove(0);
-            Rabbit young = new Rabbit(false, field, loc);
+            Rabbit young = new Rabbit(false, getGender(), field, loc);
             newRabbits.add(young);
         }
     }
@@ -120,4 +138,13 @@ public class Rabbit extends Animal
     {
         return age >= BREEDING_AGE;
     }
+    
+    /**
+     * @return The probability of the rabbit spawning
+     */
+    public double getSpawn()
+    {
+        return Spawn_Probability;
+    }
+    
 }

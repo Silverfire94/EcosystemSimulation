@@ -24,16 +24,20 @@ public class Fox extends Animal
     // The food value of a single rabbit. In effect, this is the
     // number of steps a fox can go before it has to eat again.
     private static final int RABBIT_FOOD_VALUE = 9;
+    
     // A shared random number generator to control breeding.
-    private static final Random rand = Randomizer.getRandom();
+    //private static final Random rand = Randomizer.getRandom();
+    
+    // The spawn probability of fox
+    private static double Spawn_Probability = 0.02;
     
     // Individual characteristics (instance fields).
     // The fox's age.
     private int age;
     // The fox's food level, which is increased by eating rabbits.
     private int foodLevel;
-
-    /**
+    
+      /**
      * Create a fox. A fox can be created as a new born (age zero
      * and not hungry) or with a random age and food level.
      * 
@@ -41,9 +45,9 @@ public class Fox extends Animal
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
-    public Fox(boolean randomAge, Field field, Location location)
+    public Fox(boolean randomAge,boolean male, Field field, Location location)
     {
-        super(field, location);
+        super(male, field, location);
         if(randomAge) {
             age = rand.nextInt(MAX_AGE);
             foodLevel = rand.nextInt(RABBIT_FOOD_VALUE);
@@ -52,6 +56,21 @@ public class Fox extends Animal
             age = 0;
             foodLevel = RABBIT_FOOD_VALUE;
         }
+    }
+    
+    /**
+     * Another constructor for foxes.
+     */
+    public Fox()
+    {}
+    
+    /**
+     * This allows us to create a new animal
+     * @return Returns a reference of the animal we created
+     */
+    public Animal createAnimal(boolean randomAge, boolean male, Field field, Location location)
+    {
+        return new Fox(randomAge,male,field, location);
     }
     
     /**
@@ -145,7 +164,7 @@ public class Fox extends Animal
         int births = breed();
         for(int b = 0; b < births && free.size() > 0; b++) {
             Location loc = free.remove(0);
-            Fox young = new Fox(false, field, loc);
+            Fox young = new Fox(false, getGender(), field, loc);
             newFoxes.add(young);
         }
     }
@@ -170,5 +189,17 @@ public class Fox extends Animal
     private boolean canBreed()
     {
         return age >= BREEDING_AGE;
+    }
+    
+    /**
+     * @return The probability of the rabbit spawning
+     */
+    public double getSpawn()
+    {
+        return Spawn_Probability;
+    }
+    
+    public void gender(){
+        
     }
 }
