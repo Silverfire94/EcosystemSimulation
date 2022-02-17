@@ -3,51 +3,53 @@ import java.util.Iterator;
 import java.util.Random;
 
 /**
- * class for the egales they eat rabbits and the snakes. 
+ * A simple model of a Python.
+ * Pythons age, move, eat rabbits, and die.
  * 
- * @author Vaibhavkumar Patel(k21076223) and Mark Emmanuel(k21009628).
- * @version 2022.02.14 (1)
+ * @author David J. Barnes and Michael Kölling
+ * @version 2016.02.29 (2)
  */
-public class Eagles extends Animal
+public class Python extends Animal
 {
-    // Characteristics shared by all eagles (class variables).
+    // Characteristics shared by all Pythons (class variables).
     
-    // The age at which a eagle can start to breed.
+    // The age at which a Python can start to breed.
     private static final int BREEDING_AGE = 18;
-    // The age to which a eagle can live.
-    private static final int MAX_AGE = 100;
-    // The likelihood of a eagle breeding.
-    private static final double BREEDING_PROBABILITY = 0.1;
+    // The age to which a Python can live.
+    private static final int MAX_AGE = 150;
+    // The likelihood of a Python breeding.
+    private static final double BREEDING_PROBABILITY = 0.16;
     // The maximum number of births.
     private static final int MAX_LITTER_SIZE = 3;
     // The food value of a single rabbit. In effect, this is the
-    // number of steps a eagle can go before it has to eat again.
+    // number of steps a Python can go before it has to eat again.
+    private static final int RABBIT_FOOD_VALUE = 20;
     
     // A shared random number generator to control breeding.
     //private static final Random rand = Randomizer.getRandom();
     
-    // The spawn probability of eagle
+    // The spawn probability of Python
     private static double Spawn_Probability = 0.15;
     
     // Individual characteristics (instance fields).
-
-    // The eagle's food level, which is increased by eating rabbits.
-    //private int foodLevel;
     
-      /**
-     * Create a eagle. A eagle can be created as a new born (age zero
+    // The Python's food level, which is increased by eating rabbits.
+    // private int foodLevel;
+    
+    /**
+     * Create a Python. A Python can be created as a new born (age zero
      * and not hungry) or with a random age and food level.
      * 
-     * @param randomAge If true, the eagle will have random age and hunger level.
+     * @param randomAge If true, the Python will have random age and hunger level.
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
-    public Eagles(boolean randomAge,boolean male, Field field, Location location)
+    public Python(boolean randomAge,boolean male, Field field, Location location)
     {
         super(male, field, location);
         if(randomAge) {
             age = rand.nextInt(MAX_AGE);
-            foodLevel = rand.nextInt(30);
+            foodLevel = rand.nextInt(40);
         }
         else {
             age = 0;
@@ -58,9 +60,9 @@ public class Eagles extends Animal
     }
     
     /**
-     * Another constructor for eagles.
+     * Another constructor for Pythons.
      */
-    public Eagles()
+    public Python()
     {}
     
     /**
@@ -69,22 +71,22 @@ public class Eagles extends Animal
      */
     public Animal createAnimal(boolean randomAge, boolean male, Field field, Location location)
     {
-        return new Eagles(randomAge,male,field, location);
+        return new Python(randomAge,male,field, location);
     }
     
     /**
-     * This is what the eagle does most of the time: it hunts for
+     * This is what the Python does most of the time: it hunts for
      * rabbits. In the process, it might breed, die of hunger,
      * or die of old age.
      * @param field The field currently occupied.
-     * @param newEagles A list to return newly born eagles.
+     * @param newPythons A list to return newly born Pythons.
      */
-    public void act(List<Animal> newEagles, Foodweb foodweb)
+    public void act(List<Animal> newPythons, Foodweb foodweb)
     {
         incrementAge();
         incrementHunger();
         if(isAlive()) {
-            giveBirth(newEagles);            
+            giveBirth(newPythons);            
             // Move towards a source of food if found.
             Location newLocation = findFood(foodweb);
             if(newLocation == null) { 
@@ -103,7 +105,7 @@ public class Eagles extends Animal
     }
 
     /**
-     * Increase the age. This could result in the eagle's death.
+     * Increase the age. This could result in the Python's death.
      */
     private void incrementAge()
     {
@@ -111,10 +113,16 @@ public class Eagles extends Animal
         if(age > MAX_AGE) {
             setDead();
         }
+        if(age < 10) {
+            isWeak = true;
+        }
+        else {
+            isWeak = false;
+        }
     }
     
     /**
-     * Make this eagle more hungry. This could result in the eagle's death.
+     * Make this Python more hungry. This could result in the Python's death.
      */
     private void incrementHunger()
     {
@@ -129,7 +137,7 @@ public class Eagles extends Animal
      // * Only the first live rabbit is eaten.
      // * @return Where food was found, or null if it wasn't.
      // */
-    // private Location findFood(Foodweb foodweb)
+    // protected Location findFood(Foodweb foodweb)
     // {
         // Field field = getField();
         // List<Location> adjacent = field.adjacentLocations(getLocation());
@@ -159,26 +167,26 @@ public class Eagles extends Animal
     // }
     
     /**
-     * Check whether or not this eagle is to give birth at this step.
+     * Check whether or not this Python is to give birth at this step.
      * New births will be made into free adjacent locations.
-     * @param newEagles A list to return newly born eagles.
+     * @param newPythons A list to return newly born Pythons.
      */
-    private void giveBirth(List<Animal> newEagles)
+    private void giveBirth(List<Animal> newPythons)
     {
-        // New eagles are born into adjacent locations.
+        // New Pythons are born into adjacent locations.
         // Get a list of adjacent free locations.
         Field field = getField();
         List<Location> free = field.getFreeAdjacentLocations(getLocation());
         List<Location> partners = field.adjacentLocations(getLocation());
         int births = breed();
         for(Location partner: partners){
-        if(field.getObjectAt(partner) instanceof Eagles){            
-            Eagles eagle = (Eagles) field.getObjectAt(partner); 
-            if(this.getGender() != eagle.getGender()){
+        if(field.getObjectAt(partner) instanceof Python){            
+            Python Python = (Python) field.getObjectAt(partner); 
+            if(this.getGender() != Python.getGender()){
                 for(int b = 0; b < births && free.size() > 0; b++) {
                     Location loc = free.remove(0);
-                    Eagles young = new Eagles(false, setGender(), field, loc);
-                    newEagles.add(young);
+                    Python young = new Python(false, setGender(), field, loc);
+                    newPythons.add(young);
                 }
             }
         }
@@ -200,7 +208,7 @@ public class Eagles extends Animal
     }
 
     /**
-     * A eagle can breed if it has reached the breeding age.
+     * A Python can breed if it has reached the breeding age.
      */
     private boolean canBreed()
     {
@@ -214,5 +222,4 @@ public class Eagles extends Animal
     {
         return Spawn_Probability;
     }
-    
 }

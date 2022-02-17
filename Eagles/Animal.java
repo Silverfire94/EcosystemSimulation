@@ -1,5 +1,6 @@
 import java.util.List;
 import java.util.Random;
+import java.util.Iterator;
 
 /**
  * A class representing shared characteristics of animals.
@@ -19,6 +20,12 @@ public abstract class Animal
     protected boolean male;
     // The age of the animal. 
     protected int age;
+    // Telling us if the animal is weak
+    protected boolean isWeak;
+    // This is the current food that the animal has
+    protected int foodLevel;
+    // The maximum food that an animal can eat
+    protected int whenHungery;
     // A shared random number generator to control breeding.
     protected static final Random rand = Randomizer.getRandom();
 
@@ -34,6 +41,7 @@ public abstract class Animal
         this.field = field;
         this.male = male;
         setLocation(location);
+        isWeak = false;
     }
     
     /**
@@ -49,7 +57,7 @@ public abstract class Animal
      * whatever it wants/needs to do.
      * @param newAnimals A list to receive newly born animals.
      */
-    abstract public void act(List<Animal> newAnimals);
+    abstract public void act(List<Animal> newAnimals, Foodweb foodweb);
 
     /**
      * Check whether the animal is alive or not.
@@ -135,5 +143,40 @@ public abstract class Animal
      */
     abstract public Animal createAnimal(boolean randomAge,boolean male, Field field, Location location);
     
+    /**
+     * 
+     */
+    public boolean getIsWeak()
+    {
+        return isWeak;
+    }
     
+    protected Location findFood(Foodweb foodweb)
+    {
+        Field field = getField();
+        List<Location> adjacent = field.adjacentLocations(getLocation());
+        Iterator<Location> it = adjacent.iterator();
+        while(it.hasNext()) {
+            Location where = it.next();
+            Object animal = field.getObjectAt(where);
+            List<Food> foodtypes = foodweb.getFood(this.getClass());
+            for (Food food : foodtypes)
+            {
+                Class animaltype = food.getAnimalType();
+                if (animal != null && animal.getClass() == animaltype)
+                {
+                    Animal animalToEat = (Animal) animal;
+                    // Checks if this animal is strong against the food
+                    if(animalToEat.isAlive() && foodLevel < whenHungery &&
+                        (food.getStrongAgainst() || animalToEat.getIsWeak()))
+                    {
+                        animalToEat.setDead();
+                        foodLevel += food.getFoodValue();
+                        return where;
+                    }
+                }
+            }
+        }
+        return null;
+    }
 }

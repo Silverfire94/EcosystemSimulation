@@ -6,7 +6,7 @@ import java.awt.Color;
 
 /**
  * A simple predator-prey simulator, based on a rectangular field
- * containing rabbits and foxes.
+ * containing Pigs and Pythones.
  * 
  * @author David J. Barnes and Michael Kölling
  * @version 2016.02.29 (2)
@@ -15,14 +15,16 @@ public class Simulator
 {
     // Constants representing configuration information for the simulation.
     // The default width for the grid.
-    private static final int DEFAULT_WIDTH = 120;
+    private static final int DEFAULT_WIDTH = 220;
     // The default depth of the grid.
-    private static final int DEFAULT_DEPTH = 80;
+    private static final int DEFAULT_DEPTH = 200;
 
     // List of animals in the field.
     private List<Animal> animals;
     // List of animalTypes in the field
     private List<Animal> animalTypes;
+    // The food web of the ecosystem
+    private Foodweb foodweb;
     // The current state of the field.
     private Field field;
     // The current step of the simulation.
@@ -58,16 +60,19 @@ public class Simulator
 
         // Create a view of the state of each location in the field.
         view = new SimulatorView(depth, width);
-        view.setColor(Rabbit.class, Color.RED);
-        view.setColor(Fox.class, Color.BLUE);
+        view.setColor(Pig.class, Color.RED);
+        view.setColor(Python.class, Color.BLUE);
         view.setColor(Human.class, Color.GREEN);
         view.setColor(Eagles.class, Color.MAGENTA);
         
         // Putting all animal types in the array
-        animalTypes.add(new Rabbit());
-        animalTypes.add(new Fox());
+        animalTypes.add(new Pig());
+        animalTypes.add(new Python());
         animalTypes.add(new Human());
         animalTypes.add(new Eagles());
+        
+        // Creating a new foodweb
+        foodweb = new Foodweb();
         
         // Setup a valid starting point.
         reset();
@@ -98,7 +103,7 @@ public class Simulator
     /**
      * Run the simulation from its current state for a single step.
      * Iterate over the whole field updating the state of each
-     * fox and rabbit.
+     * Python and Pig.
      */
     public void simulateOneStep()
     {
@@ -106,16 +111,16 @@ public class Simulator
 
         // Provide space for newborn animals.
         List<Animal> newAnimals = new ArrayList<>();        
-        // Let all rabbits act.
+        // Let all Pythons act.
         for(Iterator<Animal> it = animals.iterator(); it.hasNext(); ) {
             Animal animal = it.next();
-            animal.act(newAnimals);
+            animal.act(newAnimals, foodweb);
             if(! animal.isAlive()) {
                 it.remove();
             }
         }
         
-        // Add the newly born foxes and rabbits to the main lists.
+        // Add the newly born Pythones and Pythons to the main lists.
         animals.addAll(newAnimals);
         view.showStatus(step, field);
     }
@@ -134,7 +139,7 @@ public class Simulator
     }
     
     /**
-     * Randomly populate the field with foxes and rabbits.
+     * Randomly populate the field with Pythones and Pythons.
      */
     private void populate()
     {
@@ -149,15 +154,15 @@ public class Simulator
                     Location location = new Location(row, col);
                     animals.add(animal.createAnimal(true, animal.setGender(), field, location));
                 }
-                // if(rand.nextDouble() <= FOX_CREATION_PROBABILITY) {
+                // if(rand.nextDouble() <= Python_CREATION_PROBABILITY) {
                     // Location location = new Location(row, col);
-                    // Fox fox = new Fox(true, field, location);
-                    // animals.add(fox);
+                    // Python Python = new Python(true, field, location);
+                    // animals.add(Python);
                 // }
-                // else if(rand.nextDouble() <= RABBIT_CREATION_PROBABILITY) {
+                // else if(rand.nextDouble() <= Python_CREATION_PROBABILITY) {
                     // Location location = new Location(row, col);
-                    // Rabbit rabbit = new Rabbit(true, field, location);
-                    // animals.add(rabbit);
+                    // Python Python = new Python(true, field, location);
+                    // animals.add(Python);
                 // }
                 // else leave the location empty.
             }
