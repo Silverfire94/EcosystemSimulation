@@ -96,12 +96,12 @@ public class SimulatorView extends JFrame
         }
     }
 
-    /**
+     /**
      * Show the current status of the field.
      * @param step Which iteration step it is.
      * @param field The field whose status is to be displayed.
      */
-    public void showStatus(int step, Field field)
+    public void showStatus(int step, Field primaryField, Field secondaryField)
     {
         if(!isVisible()) {
             setVisible(true);
@@ -112,23 +112,26 @@ public class SimulatorView extends JFrame
         
         fieldView.preparePaint();
 
-        for(int row = 0; row < field.getDepth(); row++) {
-            for(int col = 0; col < field.getWidth(); col++) {
-                Object animal = field.getObjectAt(row, col);
+        for(int row = 0; row < primaryField.getDepth(); row++) {
+            for(int col = 0; col < primaryField.getWidth(); col++) {
+                Object animal = primaryField.getObjectAt(row, col);
+                Object land = secondaryField.getObjectAt(row, col);
                 if(animal != null) {
                     stats.incrementCount(animal.getClass());
-                    fieldView.drawMark(col, row, getColor(animal.getClass()));
+                    fieldView.drawMark(row, col, getColor(animal.getClass()));
                 }
-                else {
-                    fieldView.drawMark(col, row, EMPTY_COLOR);
+                else if(land != null){
+                    fieldView.drawMark(row, col, getColor(land.getClass()));
+                } else{
+                    fieldView.drawMark(row, col, EMPTY_COLOR);
                 }
             }
         }
         stats.countFinished();
 
-        population.setText(POPULATION_PREFIX + stats.getPopulationDetails(field));
+        population.setText(POPULATION_PREFIX + stats.getPopulationDetails(primaryField));
         fieldView.repaint();
-    }
+    } 
 
     /**
      * Determine whether the simulation should continue to run.

@@ -15,9 +15,9 @@ public class Simulator
 {
     // Constants representing configuration information for the simulation.
     // The default width for the grid.
-    private static final int DEFAULT_WIDTH = 220;
+    private static final int DEFAULT_WIDTH = 150;
     // The default depth of the grid.
-    private static final int DEFAULT_DEPTH = 200;
+    private static final int DEFAULT_DEPTH = 150;
 
     // List of animals in the field.
     private List<Animal> animals;
@@ -25,8 +25,13 @@ public class Simulator
     private List<Animal> animalTypes;
     // The food web of the ecosystem
     private Foodweb foodweb;
+    // The map object used to spawn in the type of land. 
+    private Map map;
     // The current state of the field.
     private Field field;
+    
+    private Field islandField;
+    
     // The current step of the simulation.
     private int step;
     // A graphical view of the simulation.
@@ -57,19 +62,29 @@ public class Simulator
         animals = new ArrayList<>();
         animalTypes = new ArrayList<>();
         field = new Field(depth, width);
-
+        islandField = new Field(depth, width);
+        map = new Map(depth, width);
+        
         // Create a view of the state of each location in the field.
         view = new SimulatorView(depth, width);
         view.setColor(Pig.class, Color.RED);
         view.setColor(Python.class, Color.BLUE);
         view.setColor(Human.class, Color.GREEN);
         view.setColor(Eagles.class, Color.MAGENTA);
+        view.setColor(Fish.class, Color.CYAN);
+        view.setColor(Shark.class, Color.ORANGE);
+        
+        
+        view.setColor(Water.class, Color.WHITE); 
+        view.setColor(Land.class, Color.GREEN);
         
         // Putting all animal types in the array
         animalTypes.add(new Pig());
         animalTypes.add(new Python());
         animalTypes.add(new Human());
         animalTypes.add(new Eagles());
+        animalTypes.add(new Fish());
+        animalTypes.add(new Shark());
         
         // Creating a new foodweb
         foodweb = new Foodweb();
@@ -122,7 +137,7 @@ public class Simulator
         
         // Add the newly born Pythones and Pythons to the main lists.
         animals.addAll(newAnimals);
-        view.showStatus(step, field);
+        view.showStatus(step, field, islandField);
     }
         
     /**
@@ -132,10 +147,11 @@ public class Simulator
     {
         step = 0;
         animals.clear();
+        drawLand();
         populate();
         
         // Show the starting state in the view.
-        view.showStatus(step, field);
+        view.showStatus(step, field, islandField);
     }
     
     /**
@@ -148,23 +164,31 @@ public class Simulator
         for(int row = 0; row < field.getDepth(); row++) {
             for(int col = 0; col < field.getWidth(); col++) {
                 //returns a random animal object.
-                Animal animal = animalTypes.get(rand.nextInt(4));
+                Animal animal = animalTypes.get(rand.nextInt(6));
                 if(rand.nextDouble() <= animal.getSpawn()) {
                     //spawns the animal at the location and then adds the animal to the animal list.            
                     Location location = new Location(row, col);
                     animals.add(animal.createAnimal(true, animal.setGender(), field, location));
                 }
-                // if(rand.nextDouble() <= Python_CREATION_PROBABILITY) {
-                    // Location location = new Location(row, col);
-                    // Python Python = new Python(true, field, location);
-                    // animals.add(Python);
-                // }
-                // else if(rand.nextDouble() <= Python_CREATION_PROBABILITY) {
-                    // Location location = new Location(row, col);
-                    // Python Python = new Python(true, field, location);
-                    // animals.add(Python);
-                // }
-                // else leave the location empty.
+            }
+        }
+    }
+    /**
+     * Maybe can merge with the method above.
+     */
+    private void drawLand(){
+        int [][] landmap = map.getMap();
+        islandField.clear();
+        for(int row = 0; row < field.getDepth(); row++) {
+            for(int col = 0; col < field.getWidth(); col++) {
+                if(landmap[row][col] == 0){
+                    Location location = new Location(row, col);
+                    Ground ground = new Ground(islandField, location);
+                }
+                else if(landmap[row][col] == 1){
+                    Location location = new Location(row, col);
+                    Water water = new Water(islandField ,location);
+                }
             }
         }
     }

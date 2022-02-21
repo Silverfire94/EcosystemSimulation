@@ -1,0 +1,36 @@
+#BlueJ class context
+comment0.target=Noise
+comment0.text=\r\n\ Perlin\ noise\ generation\ using\ the\ same\ method\ that\ \r\n\ <a\ href\="https\://github.com/warmwaffles/Noise/blob/master/lib/Noise/Noise.rb">Noise</a>\r\n\ uses.\r\n\ \r\n\ @author\ WarmWaffles\ (Matthew\ Johnston)\r\n\r\n
+comment1.params=seed\ octaves\ persistence
+comment1.target=Noise(int,\ float,\ float)
+comment1.text=\r\n\ Constructs\ a\ new\ Noise\ object\r\n\ \r\n\ @param\ seed\ -\ The\ random\ seed\ that\ you\ want\r\n\ @param\ octaves\ -\ The\ number\ of\ octaves\ you\ wish\ to\ go\r\n\ @param\ persistence\ -\ The\ amount\ of\ persistence\ you\ desire\r\n
+comment10.params=x
+comment10.target=float\ interpolateNoise(float)
+comment11.params=x\ y
+comment11.target=float\ interpolateNoise2D(float,\ float)
+comment12.params=x
+comment12.target=float\ perlinNoise(float)
+comment13.params=x\ y
+comment13.target=float\ perlinNoise2D(float,\ float)
+comment14.params=w\ h
+comment14.target=float[][]\ perlinNoiseMap(int,\ int)
+comment14.text=\r\n\ Generates\ a\ 2D\ array\ of\ floats.\ The\ array\ is\ structured\ as\ follows,\r\n\ \r\n\ array[y][x].\ It\ is\ not\ structured\ like\ array[x][y]\r\n\ \r\n\ @param\ w\ -\ The\ width\ of\ the\ array\ you\ want\r\n\ @param\ h\ -\ The\ height\ of\ the\ array\ you\ want\r\n\ @return\ an\ array\ that\ is\ (w\ *\ h)\ number\ of\ floats\r\n
+comment2.params=seed\ octaves
+comment2.target=Noise(int,\ float)
+comment2.text=\r\n\ Constructs\ a\ new\ Noise\ object\r\n\ \r\n\ @param\ seed\ -\ The\ random\ seed\ that\ you\ want\r\n\ @param\ octaves\ -\ The\ number\ of\ octaves\ you\ wish\ to\ go\r\n
+comment3.params=seed
+comment3.target=Noise(int)
+comment3.text=\r\n\ Constructs\ a\ new\ Noise\ object\r\n\ \r\n\ @param\ seed\ -\ The\ random\ seed\ that\ you\ want\r\n
+comment4.params=x
+comment4.target=float\ rawNoise(float)
+comment5.params=x\ y
+comment5.target=float\ rawNoise2D(float,\ float)
+comment6.params=x
+comment6.target=float\ smoothNoise(float)
+comment7.params=x\ y
+comment7.target=float\ smoothNoise2D(float,\ float)
+comment8.params=a\ b\ x
+comment8.target=float\ linearInterpolate(float,\ float,\ float)
+comment9.params=a\ b\ x
+comment9.target=float\ cosineInterpolate(float,\ float,\ float)
+numComments=15

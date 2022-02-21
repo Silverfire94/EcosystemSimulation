@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Foodweb
-comment0.text=\n\ This\ class\ maps\ all\ the\ animals\ and\ what\ they\ eat.\ \n\ \n\ @author\ Vaihbavkumar\ patel(k21076223)\ and\ mark\ emmanuel(k21009638).\n\ @version\ 1\ 2/12/2022.\n
+comment0.text=\r\n\ This\ class\ maps\ all\ the\ animals\ and\ what\ they\ eat.\ \r\n\ \r\n\ @author\ Vaihbavkumar\ patel(k21076223)\ and\ mark\ emmanuel(k21009638).\r\n\ @version\ 1\ 2/12/2022.\r\n
 comment1.params=
 comment1.target=Foodweb()
 comment2.params=animalType

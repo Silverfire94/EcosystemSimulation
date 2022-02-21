@@ -27,15 +27,21 @@ public class Foodweb
         humanEats.add(new Food(Pig.class, true, 20));
         humanEats.add(new Food(Python.class, true, 40));
         humanEats.add(new Food(Eagles.class, true, 30));
+        humanEats.add(new Food(Fish.class, true, 10)); 
         
         List eagleEats = new ArrayList<Food>();
         eagleEats.add(new Food(Pig.class, true, 20));
         eagleEats.add(new Food(Python.class, false, 40));
         eagleEats.add(new Food(Human.class, false, 50));
         
+        List sharkEats = new ArrayList<Food>(); 
+        sharkEats.add(new Food(Human.class, false, 20)); 
+        sharkEats.add(new Food(Fish.class, true, 10));
+        
         foodmap.put(Python.class, PythonEats);
         foodmap.put(Human.class, humanEats);
         foodmap.put(Eagles.class, eagleEats);
+        foodmap.put(Shark.class, sharkEats);
     }
     
     public List<Food> getFood(Class animalType)
