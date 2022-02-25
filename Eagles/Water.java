@@ -7,14 +7,27 @@
  */
 public class Water extends Land
 {
-    // instance variables - replace the example below with your own
-    private int x;
-
+    private static int ID = 1;
     /**
      * Constructor for objects of class Water
      */
     public Water(Field field, Location location)
     {
      super(field, location); 
+    }
+    
+    public Water()
+    {}
+    
+    public Land createLand(Field field, Location location){
+        return new Water(field, location);
+    }
+    
+    public boolean matchId(int givenId){
+        return givenId == ID;
+    }
+    
+    public void ChangeId(int newId){
+        ID = newId;
     }
 }

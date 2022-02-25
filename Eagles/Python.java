@@ -44,9 +44,9 @@ public class Python extends Animal
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
-    public Python(boolean randomAge,boolean male, Field field, Location location)
+    public Python(boolean randomAge,boolean male, Field field, Location location,Land land)
     {
-        super(male, field, location);
+        super(male, field, location, land);
         if(randomAge) {
             age = rand.nextInt(MAX_AGE);
             foodLevel = rand.nextInt(40);
@@ -62,16 +62,17 @@ public class Python extends Animal
     /**
      * Another constructor for Pythons.
      */
-    public Python()
-    {}
+   
+    public Python(){
+    }
     
     /**
      * This allows us to create a new animal
      * @return Returns a reference of the animal we created
      */
-    public Animal createAnimal(boolean randomAge, boolean male, Field field, Location location)
+    public Animal createAnimal(boolean randomAge, boolean male, Field field, Location location, Land land)
     {
-        return new Python(randomAge,male,field, location);
+        return new Python(randomAge,male,field, location, land);
     }
     
     /**
@@ -131,41 +132,7 @@ public class Python extends Animal
             setDead();
         }
     }
-    
-    // /**
-     // * Look for rabbits adjacent to the current location.
-     // * Only the first live rabbit is eaten.
-     // * @return Where food was found, or null if it wasn't.
-     // */
-    // protected Location findFood(Foodweb foodweb)
-    // {
-        // Field field = getField();
-        // List<Location> adjacent = field.adjacentLocations(getLocation());
-        // Iterator<Location> it = adjacent.iterator();
-        // while(it.hasNext()) {
-            // Location where = it.next();
-            // Object animal = field.getObjectAt(where);
-            // List<Food> foodtypes = foodweb.getFood(this.getClass());
-            // for (Food food : foodtypes)
-            // {
-                // Class animaltype = food.getAnimalType();
-                // if (animal != null && animal.getClass() == animaltype)
-                // {
-                    // Animal animalToEat = (Animal) animal;
-                    // // Checks if this animal is strong against the food
-                    // if(animalToEat.isAlive() && 
-                        // (food.getStrongAgainst() || animalToEat.getIsWeak()))
-                    // {
-                        // animalToEat.setDead();
-                        // foodLevel = food.getFoodValue();
-                        // return where;
-                    // }
-                // }
-            // }
-        // }
-        // return null;
-    // }
-    
+  
     /**
      * Check whether or not this Python is to give birth at this step.
      * New births will be made into free adjacent locations.
@@ -185,14 +152,18 @@ public class Python extends Animal
             if(this.getGender() != Python.getGender()){
                 for(int b = 0; b < births && free.size() > 0; b++) {
                     Location loc = free.remove(0);
-                    Python young = new Python(false, setGender(), field, loc);
+                    Python young = new Python(false, setGender(), field, loc, land);
                     newPythons.add(young);
                 }
             }
         }
+        }
     }
+    
+    public void move(){
+    
     }
-        
+    
     /**
      * Generate a number representing the number of births,
      * if it can breed.

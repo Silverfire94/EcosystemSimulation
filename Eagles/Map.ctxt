@@ -5,6 +5,4 @@ comment1.params=width\ height
 comment1.target=Map(int,\ int)
 comment2.params=
 comment2.target=int[][]\ GenerateMap()
-comment3.params=
-comment3.target=int[][]\ getMap()
-numComments=4
+numComments=3

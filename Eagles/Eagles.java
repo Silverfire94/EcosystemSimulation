@@ -42,9 +42,9 @@ public class Eagles extends Animal
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
-    public Eagles(boolean randomAge,boolean male, Field field, Location location)
+    public Eagles(boolean randomAge,boolean male, Field field, Location location, Land land)
     {
-        super(male, field, location);
+        super(male, field, location, land);
         if(randomAge) {
             age = rand.nextInt(MAX_AGE);
             foodLevel = rand.nextInt(30);
@@ -67,9 +67,9 @@ public class Eagles extends Animal
      * This allows us to create a new animal
      * @return Returns a reference of the animal we created
      */
-    public Animal createAnimal(boolean randomAge, boolean male, Field field, Location location)
+    public Animal createAnimal(boolean randomAge, boolean male, Field field, Location location, Land land)
     {
-        return new Eagles(randomAge,male,field, location);
+        return new Eagles(randomAge,male,field, location, land);
     }
     
     /**
@@ -177,12 +177,16 @@ public class Eagles extends Animal
             if(this.getGender() != eagle.getGender()){
                 for(int b = 0; b < births && free.size() > 0; b++) {
                     Location loc = free.remove(0);
-                    Eagles young = new Eagles(false, setGender(), field, loc);
+                    Eagles young = new Eagles(false, setGender(), field, loc, land);
                     newEagles.add(young);
+                }
                 }
             }
         }
     }
+    
+    public void move(){
+        
     }
         
     /**

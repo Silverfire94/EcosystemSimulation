@@ -5,6 +5,4 @@ comment1.params=
 comment1.target=Foodweb()
 comment2.params=animalType
 comment2.target=java.util.List\ getFood(java.lang.Class)
-comment3.params=
-comment3.target=void\ testMethod()
-numComments=4
+numComments=3

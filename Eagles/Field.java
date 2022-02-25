@@ -20,6 +20,8 @@ public class Field
     private int depth, width;
     // Storage for the animals.
     private Object[][] field;
+    
+    
 
     /**
      * Represent a field of the given dimensions.

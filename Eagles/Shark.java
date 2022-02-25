@@ -44,9 +44,9 @@ public class Shark extends Animal
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
-    public Shark(boolean randomAge,boolean male, Field field, Location location)
+    public Shark(boolean randomAge,boolean male, Field field, Location location, Land land)
     {
-        super(male, field, location);
+        super(male, field, location, land);
         if(randomAge) {
             age = rand.nextInt(MAX_AGE);
             foodLevel = rand.nextInt(40);
@@ -67,9 +67,9 @@ public class Shark extends Animal
      * This allows us to create a new animal
      * @return Returns a reference of the animal we created
      */
-    public Animal createAnimal(boolean randomAge, boolean male, Field field, Location location)
+    public Animal createAnimal(boolean randomAge, boolean male, Field field, Location location, Land land)
     {
-        return new Shark(randomAge,male,field, location);
+        return new Shark(randomAge,male,field, location, land);
     }
     
     /**
@@ -143,12 +143,12 @@ public class Shark extends Animal
             if(this.getGender() != fox.getGender()){
                 for(int b = 0; b < births && free.size() > 0; b++) {
                     Location loc = free.remove(0);
-                    Shark young = new Shark(false, setGender(), field, loc);
+                    Shark young = new Shark(false, setGender(), field, loc, land);
                     newSharks.add(young);
                 }
             }
         }
-    }
+        }
     }
         
     /**
@@ -179,5 +179,10 @@ public class Shark extends Animal
     public double getSpawn()
     {
         return Spawn_Probability;
+    }
+    
+    public void move()
+    {
+        
     }
 }

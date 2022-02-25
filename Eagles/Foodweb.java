@@ -11,8 +11,6 @@ import java.util.List;
 public class Foodweb
 {
     private HashMap<Class, List<Food>> foodmap;
-    private static Class type = Pig.class;
-    
     // Pig 20
     // Python 40
     // Human 50
@@ -20,8 +18,8 @@ public class Foodweb
     
     public Foodweb(){
         foodmap = new HashMap<>();
-        List PythonEats = new ArrayList<Food>();
-        PythonEats.add(new Food(Pig.class, true, 20));
+        List pythonEats = new ArrayList<Food>();
+        pythonEats.add(new Food(Pig.class, true, 20));
         
         List humanEats = new ArrayList<Food>();
         humanEats.add(new Food(Pig.class, true, 20));
@@ -38,7 +36,7 @@ public class Foodweb
         sharkEats.add(new Food(Human.class, false, 20)); 
         sharkEats.add(new Food(Fish.class, true, 10));
         
-        foodmap.put(Python.class, PythonEats);
+        foodmap.put(Python.class, pythonEats);
         foodmap.put(Human.class, humanEats);
         foodmap.put(Eagles.class, eagleEats);
         foodmap.put(Shark.class, sharkEats);
@@ -47,23 +45,5 @@ public class Foodweb
     public List<Food> getFood(Class animalType)
     {
         return foodmap.get(animalType);
-    }
-    
-    public static void testMethod()
-    {
-        Pig Pig = new Pig();
-        if(Pig.getClass() == type)
-        {
-            System.out.println("This is a Pig");
-        }
-        else
-        {
-            System.out.println("This is not a Pig");
-        }
-        
-        if(1000000 < Double.POSITIVE_INFINITY)
-        {
-            System.out.println("Smaller");
-        }
-    }
+    }   
 }

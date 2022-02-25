@@ -9,37 +9,33 @@ import java.util.Random;
 public class Map
 {
     private int width, height;
-    private Noise noise;
+    private PerlinNoise noise;
+    private Random rand;
     private int [][] map;
-    private int seed;
-    private float s, h; 
+   
     public Map(int width, int height)
     {
         this.width = width; 
         this.height = height;
+        rand = new Random();
+        noise = new PerlinNoise();
         
-        Random rand = new Random();
-        noise = new Noise(rand.nextInt(10), 100.5f, 0.01f);
-        GenerateMap();
     }
 
-    private int[][] GenerateMap(){
-        float [][] noisemap = noise.perlinNoiseMap(width, height);
+    public int[][] GenerateMap(){
+        float [][] noisemap = noise.generatePerlinNoise(width, height, 4, 0.3f, rand.nextInt(10));
         map = new int[width][height];
+        
         for(int x = 0; x < width; x++){
             for(int y = 0; y < height; y++){
-                if(noisemap[x][y] < 0 ){
-                    map[x][y] = 1;
-                } else{
+                if(noisemap[x][y] < 0.5){
                     map[x][y] = 0;
+                } else{
+                    map[x][y] = 1;
                 }
             }      
         }
         return map;
     }
-    
-    
-    public int[][] getMap(){
-        return map;
-    }
+
 }

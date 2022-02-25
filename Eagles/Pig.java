@@ -37,9 +37,9 @@ public class Pig extends Animal
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
-    public Pig(boolean randomAge,boolean male, Field field, Location location)
+    public Pig(boolean randomAge,boolean male, Field field, Location location, Land land)
     {
-        super(male, field, location);
+        super(male, field, location, land);
         age = 0;
         if(randomAge) {
             age = rand.nextInt(MAX_AGE);
@@ -56,9 +56,9 @@ public class Pig extends Animal
      * This allows us to create a new animal
      * @return Returns a reference of the animal we created
      */
-    public Animal createAnimal(boolean randomAge,boolean male, Field field, Location location)
+    public Animal createAnimal(boolean randomAge,boolean male, Field field, Location location, Land land)
     {
-        return new Pig(randomAge, male, field, location);
+        return new Pig(randomAge, male, field, location, land);
     }
     
     /**
@@ -115,12 +115,16 @@ public class Pig extends Animal
                 if(this.getGender() != Pig.getGender()){
                     for(int b = 0; b < births && free.size() > 0; b++) {
                         Location loc = free.remove(0);
-                        Pig young = new Pig(false, setGender(), field, loc);
+                        Pig young = new Pig(false, setGender(), field, loc, land);
                         newPigs.add(young);
                     }
                 }
             }
         }
+    }
+    
+    public void move(){
+        
     }
         
     /**

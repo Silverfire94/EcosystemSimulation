@@ -42,9 +42,9 @@ public class Human extends Animal
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
-    public Human(boolean randomAge,boolean male, Field field, Location location)
+    public Human(boolean randomAge,boolean male, Field field, Location location, Land land)
     {
-        super(male, field, location);
+        super(male, field, location, land);
         if(randomAge) {
             age = rand.nextInt(MAX_AGE);
             foodLevel = rand.nextInt(50);
@@ -67,9 +67,9 @@ public class Human extends Animal
      * This allows us to create a new animal
      * @return Returns a reference of the animal we created
      */
-    public Animal createAnimal(boolean randomAge, boolean male, Field field, Location location)
+    public Animal createAnimal(boolean randomAge, boolean male, Field field, Location location, Land land)
     {
-        return new Human(randomAge,male,field, location);
+        return new Human(randomAge,male,field, location, land);
     }
 
     /**
@@ -130,40 +130,6 @@ public class Human extends Animal
         }
     }
 
-    // /**
-     // * Look for rabbits adjacent to the current location.
-     // * Only the first live rabbit is eaten.
-     // * @return Where food was found, or null if it wasn't.
-     // */
-    // private Location findFood(Foodweb foodweb)
-    // {
-        // Field field = getField();
-        // List<Location> adjacent = field.adjacentLocations(getLocation());
-        // Iterator<Location> it = adjacent.iterator();
-        // while(it.hasNext()) {
-            // Location where = it.next();
-            // Object animal = field.getObjectAt(where);
-            // List<Food> foodtypes = foodweb.getFood(this.getClass());
-            // for (Food food : foodtypes)
-            // {
-                // Class animaltype = food.getAnimalType();
-                // if (animal != null && animal.getClass() == animaltype)
-                // {
-                    // Animal animalToEat = (Animal) animal;
-                    // // Checks if this animal is strong against the food
-                    // if(animalToEat.isAlive() && 
-                        // (food.getStrongAgainst() || animalToEat.getIsWeak()))
-                    // {
-                        // animalToEat.setDead();
-                        // foodLevel = food.getFoodValue();
-                        // return where;
-                    // }
-                // }
-            // }
-        // }
-        // return null;
-    // }
-
     /**
      * Check whether or not this human is to give birth at this step.
      * New births will be made into free adjacent locations.
@@ -183,7 +149,7 @@ public class Human extends Animal
                 if(this.getGender() != human.getGender()){
                     for(int b = 0; b < births && free.size() > 0; b++) {
                         Location loc = free.remove(0);
-                        Human young = new Human(false, setGender(), field, loc);
+                        Human young = new Human(false, setGender(), field, loc, land);
                         newHumans.add(young);
                     }
                 }
@@ -220,5 +186,8 @@ public class Human extends Animal
     {
         return Spawn_Probability;
     }
-
+    
+    public void move(){
+        
+    }
 }

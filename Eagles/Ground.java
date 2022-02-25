@@ -8,7 +8,7 @@
 public class Ground extends Land
 {
     // instance variables - replace the example below with your own
-    private int x;
+    private static int Id = 0;
 
     /**
      * Constructor for objects of class Ground
@@ -17,5 +17,15 @@ public class Ground extends Land
     {
         super(field, location);
     }
-
+    public Ground(){
+        
+    }
+    
+    public Land createLand(Field field, Location location){
+        return new Ground(field, location);
+    }
+    
+    public boolean matchId(int givenId){
+        return givenId == Id;
+    }
 }

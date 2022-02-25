@@ -28,18 +28,20 @@ public abstract class Animal
     protected int whenHungery;
     // A shared random number generator to control breeding.
     protected static final Random rand = Randomizer.getRandom();
-
+    
+    protected Land land; 
     /**
      * Create a new animal at location in field.
      * 
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
-    public Animal(boolean male, Field field, Location location)
+    public Animal(boolean male, Field field, Location location,Land land)
     {
         alive = true;
         this.field = field;
         this.male = male;
+        this.land = land;
         setLocation(location);
         isWeak = false;
     }
@@ -141,11 +143,11 @@ public abstract class Animal
     /**
      * Alls the animal to create new animals
      */
-    abstract public Animal createAnimal(boolean randomAge,boolean male, Field field, Location location);
-    
+    abstract public Animal createAnimal(boolean randomAge,boolean male, Field field, Location location, Land land);
     /**
      * 
      */
+    abstract public void move();
     public boolean getIsWeak()
     {
         return isWeak;
@@ -179,4 +181,6 @@ public abstract class Animal
         }
         return null;
     }
+    
+    
 }
