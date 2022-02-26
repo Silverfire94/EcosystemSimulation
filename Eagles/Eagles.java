@@ -185,10 +185,6 @@ public class Eagles extends Animal
         }
     }
     
-    public void move(){
-        
-    }
-        
     /**
      * Generate a number representing the number of births,
      * if it can breed.

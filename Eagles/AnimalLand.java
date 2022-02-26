@@ -35,8 +35,8 @@ public class AnimalLand
         humanBiome.add(ShallowWater.class); 
         
         List fishBiome = new ArrayList<Land>();
-        sharkBiome.add(Water.class);
-        sharkBiome.add(ShallowWater.class);
+        fishBiome.add(Water.class);
+        fishBiome.add(ShallowWater.class);
         
         landmap.put(Python.class, pythonBiome);
         landmap.put(Shark.class, sharkBiome);

@@ -83,7 +83,7 @@ public class Simulator
         view.setColor(Python.class, Color.YELLOW);
         view.setColor(Human.class, Color.white);
         view.setColor(Eagles.class, Color.MAGENTA);
-        view.setColor(Fish.class, Color.CYAN);
+        view.setColor(Fish.class, Color.ORANGE);
         view.setColor(Shark.class, Color.red);
 
         view.setColor(Water.class, Color.BLUE); 

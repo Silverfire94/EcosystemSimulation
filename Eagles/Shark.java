@@ -181,8 +181,6 @@ public class Shark extends Animal
         return Spawn_Probability;
     }
     
-    public void move()
-    {
-        
-    }
+  
 }
+

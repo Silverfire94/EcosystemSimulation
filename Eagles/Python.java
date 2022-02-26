@@ -143,25 +143,21 @@ public class Python extends Animal
         // New Pythons are born into adjacent locations.
         // Get a list of adjacent free locations.
         Field field = getField();
-        List<Location> free = field.getFreeAdjacentLocations(getLocation());
+        
         List<Location> partners = field.adjacentLocations(getLocation());
         int births = breed();
         for(Location partner: partners){
         if(field.getObjectAt(partner) instanceof Python){            
             Python Python = (Python) field.getObjectAt(partner); 
             if(this.getGender() != Python.getGender()){
-                for(int b = 0; b < births && free.size() > 0; b++) {
-                    Location loc = free.remove(0);
+                for(int b = 0; b < births && moveAbleLand().size() > 0; b++) {
+                    Location loc = moveAbleLand().remove(0);
                     Python young = new Python(false, setGender(), field, loc, land);
                     newPythons.add(young);
                 }
             }
         }
         }
-    }
-    
-    public void move(){
-    
     }
     
     /**

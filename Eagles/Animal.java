@@ -144,10 +144,33 @@ public abstract class Animal
      * Alls the animal to create new animals
      */
     abstract public Animal createAnimal(boolean randomAge,boolean male, Field field, Location location, Land land);
+    
     /**
      * 
      */
-    abstract public void move();
+    protected List<Location> moveAbleLand()
+    {
+        Field islandField = getLand().getField();
+        AnimalLand animalLand = new AnimalLand();
+        List <Location> freeLand = islandField.getFreeAdjacentLocations(getLocation());
+        Iterator<Location> it = freeLand.iterator();      
+        List<Class> movableLand = animalLand.getLandMap().get(this.getClass());
+        while(it.hasNext()){
+            Location where = it.next();
+            Object land = islandField.getObjectAt(where);
+            for(Class landClass : movableLand){
+                if(land != null && land.getClass() != landClass){
+                    freeLand.remove(where);
+                }
+            }
+        }
+        return freeLand;
+    }
+    
+    public Land getLand(){
+        return land;
+    }
+    
     public boolean getIsWeak()
     {
         return isWeak;
@@ -156,8 +179,7 @@ public abstract class Animal
     protected Location findFood(Foodweb foodweb)
     {
         Field field = getField();
-        List<Location> adjacent = field.adjacentLocations(getLocation());
-        Iterator<Location> it = adjacent.iterator();
+        Iterator<Location> it = moveAbleLand().iterator();
         while(it.hasNext()) {
             Location where = it.next();
             Object animal = field.getObjectAt(where);
