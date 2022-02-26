@@ -42,9 +42,9 @@ public class Human extends Animal
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
-    public Human(boolean randomAge,boolean male, Field field, Location location, Land land)
+    public Human(boolean randomAge,boolean male, Field field, Location location, Field islandField)
     {
-        super(male, field, location, land);
+        super(male, field, location, islandField);
         if(randomAge) {
             age = rand.nextInt(MAX_AGE);
             foodLevel = rand.nextInt(50);
@@ -67,9 +67,9 @@ public class Human extends Animal
      * This allows us to create a new animal
      * @return Returns a reference of the animal we created
      */
-    public Animal createAnimal(boolean randomAge, boolean male, Field field, Location location, Land land)
+    public Animal createAnimal(boolean randomAge, boolean male, Field field, Location location, Field islandField)
     {
-        return new Human(randomAge,male,field, location, land);
+        return new Human(randomAge,male,field, location, islandField);
     }
 
     /**
@@ -89,7 +89,7 @@ public class Human extends Animal
             Location newLocation = findFood(foodweb);
             if(newLocation == null) { 
                 // No food found - try to move to a free location.
-                newLocation = getField().freeAdjacentLocation(getLocation());
+                newLocation = getMoveAbleLand();
             }
             // See if it was possible to move.
             if(newLocation != null) {
@@ -140,20 +140,21 @@ public class Human extends Animal
         // New humans are born into adjacent locations.
         // Get a list of adjacent free locations.
         Field field = getField();
-        List<Location> free = field.getFreeAdjacentLocations(getLocation());
+        Field islandField = getIslandField();
+        
         List<Location> partners = field.adjacentLocations(getLocation());
         int births = breed();
         for(Location partner: partners){
-            if(field.getObjectAt(partner) instanceof Human){            
-                Human human = (Human) field.getObjectAt(partner); 
-                if(this.getGender() != human.getGender()){
-                    for(int b = 0; b < births && free.size() > 0; b++) {
-                        Location loc = free.remove(0);
-                        Human young = new Human(false, setGender(), field, loc, land);
-                        newHumans.add(young);
-                    }
+        if(field.getObjectAt(partner) instanceof Human){            
+            Human human = (Human) field.getObjectAt(partner); 
+            if(this.getGender() != human.getGender()){
+                for(int b = 0; b < births && moveAbleLands().size() > 0; b++) {
+                    Location loc = moveAbleLands().remove(0);
+                    Human young = new Human(false, setGender(), field, loc, islandField);
+                    newHumans.add(young);
                 }
             }
+        }
         }
     }
 

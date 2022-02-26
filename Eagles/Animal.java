@@ -1,6 +1,7 @@
 import java.util.List;
 import java.util.Random;
 import java.util.Iterator;
+import java.util.ArrayList;
 
 /**
  * A class representing shared characteristics of animals.
@@ -16,6 +17,8 @@ public abstract class Animal
     private Field field;
     // The animal's position in the field.
     private Location location;
+    //
+    private Field islandField;
     // The gender of the animal.
     protected boolean male;
     // The age of the animal. 
@@ -28,32 +31,30 @@ public abstract class Animal
     protected int whenHungery;
     // A shared random number generator to control breeding.
     protected static final Random rand = Randomizer.getRandom();
-    
-    protected Land land; 
     /**
      * Create a new animal at location in field.
      * 
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
-    public Animal(boolean male, Field field, Location location,Land land)
+    public Animal(boolean male, Field field, Location location, Field islandField)
     {
         alive = true;
         this.field = field;
         this.male = male;
-        this.land = land;
+        this.islandField = islandField;
         setLocation(location);
         isWeak = false;
     }
-    
+
     /**
      * Creates a new animal for the animalTypes array
      */
     public Animal()
     {
-        
+
     }
-    
+
     /**
      * Make this animal act - that is: make it do
      * whatever it wants/needs to do.
@@ -92,7 +93,7 @@ public abstract class Animal
     {
         return location;
     }
-    
+
     /**
      * Place the animal at the new location in the given field.
      * @param newLocation The animal's new location.
@@ -105,7 +106,7 @@ public abstract class Animal
         location = newLocation;
         field.place(this, newLocation);
     }
-    
+
     /**
      * Return the animal's field.
      * @return The animal's field.
@@ -126,60 +127,97 @@ public abstract class Animal
         }
         return male;
     }
-    
+
     protected boolean getGender(){
         return male;
     }
-    
+
     protected int getAge(){
         return age;    
     }
-    
+
     /**
      * This return the probability of spawning the animal
      */
     abstract public double getSpawn();
-    
+
     /**
      * Alls the animal to create new animals
      */
-    abstract public Animal createAnimal(boolean randomAge,boolean male, Field field, Location location, Land land);
-    
+    abstract public Animal createAnimal(boolean randomAge,boolean male, Field field, Location location, Field islandField);
+
     /**
      * 
      */
-    protected List<Location> moveAbleLand()
+    protected List<Location> moveAbleLands()
     {
-        Field islandField = getLand().getField();
+        Field animalField = getField();
         AnimalLand animalLand = new AnimalLand();
-        List <Location> freeLand = islandField.getFreeAdjacentLocations(getLocation());
-        Iterator<Location> it = freeLand.iterator();      
+        
+        List<Location> freeLand = islandField.adjacentLocations(getLocation());
+        List<Location> freeAdjacentLoc = field.getFreeAdjacentLocations(getLocation());
+        List<Location> freeLocations = new ArrayList();
         List<Class> movableLand = animalLand.getLandMap().get(this.getClass());
-        while(it.hasNext()){
-            Location where = it.next();
-            Object land = islandField.getObjectAt(where);
-            for(Class landClass : movableLand){
-                if(land != null && land.getClass() != landClass){
-                    freeLand.remove(where);
+        
+        Iterator<Location> it1 = freeLand.iterator();
+        Iterator<Location> it2 = freeAdjacentLoc.iterator();
+        
+        
+        while(it1.hasNext()){
+                Location whereFreeLand = it1.next();
+                Land land = (Land) islandField.getObjectAt(whereFreeLand);
+                boolean found = false;
+                for(Class landClass : movableLand){
+                    if(land.getClass() == landClass){
+                        found = true;
+                    }
+                }
+                
+                if(!found){
+                    it1.remove();
+                }
+        }
+        
+        
+        
+        while(it2.hasNext()){
+            Location whereNoAnimal = it2.next();
+            for(Location location : freeLand){
+                if(location.equals(whereNoAnimal)){
+                    freeLocations.add(location);
                 }
             }
         }
-        return freeLand;
+        
+        
+        return freeLocations;
     }
     
-    public Land getLand(){
-        return land;
+    protected Location getMoveAbleLand()
+    {
+        // The available free ones.
+        List<Location> free = moveAbleLands();
+        if(free.size() > 0) {
+            return free.get(0);
+        }
+        else {
+            return null;
+        }
     }
-    
+
+    public Field getIslandField(){
+        return islandField;
+    }
+
     public boolean getIsWeak()
     {
         return isWeak;
     }
-    
+
     protected Location findFood(Foodweb foodweb)
     {
         Field field = getField();
-        Iterator<Location> it = moveAbleLand().iterator();
+        Iterator<Location> it = moveAbleLands().iterator();
         while(it.hasNext()) {
             Location where = it.next();
             Object animal = field.getObjectAt(where);
@@ -192,7 +230,7 @@ public abstract class Animal
                     Animal animalToEat = (Animal) animal;
                     // Checks if this animal is strong against the food
                     if(animalToEat.isAlive() && foodLevel < whenHungery &&
-                        (food.getStrongAgainst() || animalToEat.getIsWeak()))
+                    (food.getStrongAgainst() || animalToEat.getIsWeak()))
                     {
                         animalToEat.setDead();
                         foodLevel += food.getFoodValue();
@@ -205,4 +243,5 @@ public abstract class Animal
     }
     
     
+
 }

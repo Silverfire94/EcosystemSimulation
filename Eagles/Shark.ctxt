@@ -1,8 +1,8 @@
 #BlueJ class context
 comment0.target=Shark
 comment0.text=\r\n\ A\ simple\ model\ of\ a\ fox.\r\n\ Sharks\ age,\ move,\ eat\ rabbits,\ and\ die.\r\n\ \r\n\ @author\ David\ J.\ Barnes\ and\ Michael\ K\u00F6lling\r\n\ @version\ 2016.02.29\ (2)\r\n
-comment1.params=randomAge\ male\ field\ location\ land
-comment1.target=Shark(boolean,\ boolean,\ Field,\ Location,\ Land)
+comment1.params=randomAge\ male\ field\ location\ islandField
+comment1.target=Shark(boolean,\ boolean,\ Field,\ Location,\ Field)
 comment1.text=\r\n\ Create\ a\ fox.\ A\ fox\ can\ be\ created\ as\ a\ new\ born\ (age\ zero\r\n\ and\ not\ hungry)\ or\ with\ a\ random\ age\ and\ food\ level.\r\n\ \r\n\ @param\ randomAge\ If\ true,\ the\ fox\ will\ have\ random\ age\ and\ hunger\ level.\r\n\ @param\ field\ The\ field\ currently\ occupied.\r\n\ @param\ location\ The\ location\ within\ the\ field.\r\n
 comment10.params=
 comment10.target=double\ getSpawn()
@@ -10,8 +10,8 @@ comment10.text=\r\n\ @return\ The\ probability\ of\ the\ rabbit\ spawning\r\n
 comment2.params=
 comment2.target=Shark()
 comment2.text=\r\n\ Another\ constructor\ for\ sharks.\r\n
-comment3.params=randomAge\ male\ field\ location\ land
-comment3.target=Animal\ createAnimal(boolean,\ boolean,\ Field,\ Location,\ Land)
+comment3.params=randomAge\ male\ field\ location\ islandField
+comment3.target=Animal\ createAnimal(boolean,\ boolean,\ Field,\ Location,\ Field)
 comment3.text=\r\n\ This\ allows\ us\ to\ create\ a\ new\ animal\r\n\ @return\ Returns\ a\ reference\ of\ the\ animal\ we\ created\r\n
 comment4.params=newSharks\ foodweb
 comment4.target=void\ act(java.util.List,\ Foodweb)

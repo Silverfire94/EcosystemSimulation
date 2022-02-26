@@ -37,9 +37,9 @@ public class Pig extends Animal
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
-    public Pig(boolean randomAge,boolean male, Field field, Location location, Land land)
+    public Pig(boolean randomAge,boolean male, Field field, Location location, Field islandField)
     {
-        super(male, field, location, land);
+        super(male, field, location, islandField);
         age = 0;
         if(randomAge) {
             age = rand.nextInt(MAX_AGE);
@@ -56,9 +56,9 @@ public class Pig extends Animal
      * This allows us to create a new animal
      * @return Returns a reference of the animal we created
      */
-    public Animal createAnimal(boolean randomAge,boolean male, Field field, Location location, Land land)
+    public Animal createAnimal(boolean randomAge,boolean male, Field field, Location location, Field islandField)
     {
-        return new Pig(randomAge, male, field, location, land);
+        return new Pig(randomAge, male, field, location, islandField);
     }
     
     /**
@@ -72,7 +72,7 @@ public class Pig extends Animal
         if(isAlive()) {
             giveBirth(newPigs);            
             // Try to move into a free location.
-            Location newLocation = getField().freeAdjacentLocation(getLocation());
+            Location newLocation = getMoveAbleLand();
             if(newLocation != null) {
                 setLocation(newLocation);
             }
@@ -105,21 +105,21 @@ public class Pig extends Animal
         // New Pigs are born into adjacent locations.
         // Get a list of adjacent free locations.
         Field field = getField();
-        List<Location> free = field.getFreeAdjacentLocations(getLocation());
+        Field islandField = getIslandField();
+        
         List<Location> partners = field.adjacentLocations(getLocation());
         int births = breed();
-        
         for(Location partner: partners){
-            if(field.getObjectAt(partner) instanceof Pig){            
-                Pig Pig = (Pig) field.getObjectAt(partner);
-                if(this.getGender() != Pig.getGender()){
-                    for(int b = 0; b < births && free.size() > 0; b++) {
-                        Location loc = free.remove(0);
-                        Pig young = new Pig(false, setGender(), field, loc, land);
-                        newPigs.add(young);
-                    }
+        if(field.getObjectAt(partner) instanceof Pig){            
+            Pig pig = (Pig) field.getObjectAt(partner); 
+            if(this.getGender() != pig.getGender()){
+                for(int b = 0; b < births && moveAbleLands().size() > 0; b++) {
+                    Location loc = moveAbleLands().remove(0);
+                    Pig young = new Pig(false, setGender(), field, loc, islandField);
+                    newPigs.add(young);
                 }
             }
+        }
         }
     }
       

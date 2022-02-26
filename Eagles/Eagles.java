@@ -42,9 +42,9 @@ public class Eagles extends Animal
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
-    public Eagles(boolean randomAge,boolean male, Field field, Location location, Land land)
+    public Eagles(boolean randomAge,boolean male, Field field, Location location, Field islandField)
     {
-        super(male, field, location, land);
+        super(male, field, location, islandField);
         if(randomAge) {
             age = rand.nextInt(MAX_AGE);
             foodLevel = rand.nextInt(30);
@@ -67,9 +67,9 @@ public class Eagles extends Animal
      * This allows us to create a new animal
      * @return Returns a reference of the animal we created
      */
-    public Animal createAnimal(boolean randomAge, boolean male, Field field, Location location, Land land)
+    public Animal createAnimal(boolean randomAge, boolean male, Field field, Location location, Field islandField)
     {
-        return new Eagles(randomAge,male,field, location, land);
+        return new Eagles(randomAge,male,field, location, islandField);
     }
     
     /**
@@ -89,7 +89,7 @@ public class Eagles extends Animal
             Location newLocation = findFood(foodweb);
             if(newLocation == null) { 
                 // No food found - try to move to a free location.
-                newLocation = getField().freeAdjacentLocation(getLocation());
+                newLocation = getMoveAbleLand();
             }
             // See if it was possible to move.
             if(newLocation != null) {
@@ -168,20 +168,21 @@ public class Eagles extends Animal
         // New eagles are born into adjacent locations.
         // Get a list of adjacent free locations.
         Field field = getField();
-        List<Location> free = field.getFreeAdjacentLocations(getLocation());
+        Field islandField = getIslandField();
+        
         List<Location> partners = field.adjacentLocations(getLocation());
         int births = breed();
         for(Location partner: partners){
         if(field.getObjectAt(partner) instanceof Eagles){            
             Eagles eagle = (Eagles) field.getObjectAt(partner); 
             if(this.getGender() != eagle.getGender()){
-                for(int b = 0; b < births && free.size() > 0; b++) {
-                    Location loc = free.remove(0);
-                    Eagles young = new Eagles(false, setGender(), field, loc, land);
+                for(int b = 0; b < births && moveAbleLands().size() > 0; b++) {
+                    Location loc = moveAbleLands().remove(0);
+                    Eagles young = new Eagles(false, setGender(), field, loc, islandField);
                     newEagles.add(young);
                 }
-                }
             }
+        }
         }
     }
     

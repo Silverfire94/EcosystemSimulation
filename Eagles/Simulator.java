@@ -72,6 +72,7 @@ public class Simulator
         animalTypes = new ArrayList<>();
         lands = new ArrayList<>();
         landTypes = new ArrayList<>();
+        
 
         field = new Field(depth, width);
         islandField = new Field(depth, width);
@@ -163,7 +164,9 @@ public class Simulator
     {
         step = 0;
         animals.clear();
+        lands.clear();
         drawLand();
+        updateLand();
         populate();
 
         // Show the starting state in the view.
@@ -184,12 +187,12 @@ public class Simulator
                 Animal animal = animalTypes.get(rand.nextInt(6));
                 List<Class> spawnLand = animalLand.getLandMap().get(animal.getClass());
                 for(Class landClass : spawnLand){
-                if(rand.nextDouble() <= animal.getSpawn()*4) {
+                if(rand.nextDouble() <= animal.getSpawn()) {
                     //spawns the animal at the location and then adds the animal to the animal list.            
                     Location location = new Location(row, col);
                     Land typeOfLand = (Land) islandField.getObjectAt(row, col);
                     if(typeOfLand.getClass() == landClass){
-                        animals.add(animal.createAnimal(true, animal.setGender(), field, location, typeOfLand));
+                        animals.add(animal.createAnimal(true, animal.setGender(), field, location, islandField));
                     }
                 }
             }
@@ -215,7 +218,10 @@ public class Simulator
                 }
             }   
         }
-
+    }
+    
+    public void updateLand()
+    {
         for(Land land : lands){
             if(land instanceof Ground){
                 List<Location> adjacent = islandField.adjacentLocations(land.getLocation());

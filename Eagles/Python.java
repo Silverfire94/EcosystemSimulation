@@ -44,9 +44,9 @@ public class Python extends Animal
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
-    public Python(boolean randomAge,boolean male, Field field, Location location,Land land)
+    public Python(boolean randomAge,boolean male, Field field, Location location,Field islandField)
     {
-        super(male, field, location, land);
+        super(male, field, location, islandField);
         if(randomAge) {
             age = rand.nextInt(MAX_AGE);
             foodLevel = rand.nextInt(40);
@@ -70,9 +70,9 @@ public class Python extends Animal
      * This allows us to create a new animal
      * @return Returns a reference of the animal we created
      */
-    public Animal createAnimal(boolean randomAge, boolean male, Field field, Location location, Land land)
+    public Animal createAnimal(boolean randomAge, boolean male, Field field, Location location, Field islandField)
     {
-        return new Python(randomAge,male,field, location, land);
+        return new Python(randomAge,male,field, location, islandField);
     }
     
     /**
@@ -92,7 +92,7 @@ public class Python extends Animal
             Location newLocation = findFood(foodweb);
             if(newLocation == null) { 
                 // No food found - try to move to a free location.
-                newLocation = getField().freeAdjacentLocation(getLocation());
+                newLocation = getMoveAbleLand();
             }
             // See if it was possible to move.
             if(newLocation != null) {
@@ -143,16 +143,17 @@ public class Python extends Animal
         // New Pythons are born into adjacent locations.
         // Get a list of adjacent free locations.
         Field field = getField();
+        Field islandField = getIslandField();
         
         List<Location> partners = field.adjacentLocations(getLocation());
         int births = breed();
         for(Location partner: partners){
         if(field.getObjectAt(partner) instanceof Python){            
-            Python Python = (Python) field.getObjectAt(partner); 
-            if(this.getGender() != Python.getGender()){
-                for(int b = 0; b < births && moveAbleLand().size() > 0; b++) {
-                    Location loc = moveAbleLand().remove(0);
-                    Python young = new Python(false, setGender(), field, loc, land);
+            Python python = (Python) field.getObjectAt(partner); 
+            if(this.getGender() != python.getGender()){
+                for(int b = 0; b < births && moveAbleLands().size() > 0; b++) {
+                    Location loc = moveAbleLands().remove(0);
+                    Python young = new Python(false, setGender(), field, loc, islandField);
                     newPythons.add(young);
                 }
             }

@@ -23,7 +23,7 @@ public class Map
     }
 
     public int[][] GenerateMap(){
-        float [][] noisemap = noise.generatePerlinNoise(width, height, 4, 0.3f, rand.nextInt(10));
+        float [][] noisemap = noise.generatePerlinNoise(width, height, 4, 0.3f, rand.nextInt(100));
         map = new int[width][height];
         
         for(int x = 0; x < width; x++){
