@@ -1,11 +1,11 @@
 #BlueJ class context
 comment0.target=Food
 comment0.text=\r\n\ Write\ a\ description\ of\ class\ Food\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
-comment1.params=animalType\ strongAgainst\ foodValue
+comment1.params=foodType\ strongAgainst\ foodValue
 comment1.target=Food(java.lang.Class,\ boolean,\ int)
 comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Food\r\n
 comment2.params=
-comment2.target=java.lang.Class\ getAnimalType()
+comment2.target=java.lang.Class\ getFoodType()
 comment2.text=\r\n\ @Return\ The\ class\ of\ the\ animal\r\n
 comment3.params=
 comment3.target=boolean\ getStrongAgainst()

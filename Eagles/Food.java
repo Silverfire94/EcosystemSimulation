@@ -8,16 +8,16 @@
 public class Food
 {
     // instance variables - replace the example below with your own
-    private Class animalType;
+    private Class foodType;
     private boolean strongAgainst;
     private int foodValue;
 
     /**
      * Constructor for objects of class Food
      */
-    public Food(Class animalType, boolean strongAgainst, int foodValue)
+    public Food(Class foodType, boolean strongAgainst, int foodValue)
     {
-        this.animalType = animalType;
+        this.foodType = foodType;
         this.strongAgainst = strongAgainst;
         this.foodValue = foodValue;
     }
@@ -25,9 +25,9 @@ public class Food
     /**
      * @Return The class of the animal
      */
-    public Class getAnimalType()
+    public Class getFoodType()
     {
-        return animalType;
+        return foodType;
     }
     
     /**

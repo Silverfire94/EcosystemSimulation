@@ -1,8 +1,8 @@
 #BlueJ class context
 comment0.target=Ground
 comment0.text=\r\n\ Write\ a\ description\ of\ class\ Ground\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
-comment1.params=field\ location
-comment1.target=Ground(Field,\ Location)
+comment1.params=field\ location\ plant
+comment1.target=Ground(Field,\ Location,\ Plant)
 comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Ground\r\n
 comment2.params=
 comment2.target=Ground()
@@ -10,4 +10,8 @@ comment3.params=field\ location
 comment3.target=Land\ createLand(Field,\ Location)
 comment4.params=givenId
 comment4.target=boolean\ matchId(int)
-numComments=5
+comment5.params=
+comment5.target=Plant\ getPlant()
+comment6.params=plant
+comment6.target=void\ addPlant(Plant)
+numComments=7

@@ -9,10 +9,10 @@ import java.util.Random;
  * @author David J. Barnes and Michael Kölling
  * @version 2016.02.29 (2)
  */
-public class Shark extends Animal
+public class Shark extends Carnivore
 {
     // Characteristics shared by all sharks (class variables).
-    
+
     // The age at which a fox can start to breed.
     private static final int BREEDING_AGE = 15;
     // The age to which a fox can live.
@@ -24,18 +24,18 @@ public class Shark extends Animal
     // The food value of a single rabbit. In effect, this is the
     // number of steps a fox can go before it has to eat again.
     private static final int RABBIT_FOOD_VALUE = 20;
-    
+
     // A shared random number generator to control breeding.
     //private static final Random rand = Randomizer.getRandom();
-    
+
     // The spawn probability of fox
     private static double Spawn_Probability = 0.15;
-    
+
     // Individual characteristics (instance fields).
-    
+
     // The fox's food level, which is increased by eating rabbits.
     private int foodLevel;
-    
+
     /**
      * Create a fox. A fox can be created as a new born (age zero
      * and not hungry) or with a random age and food level.
@@ -56,13 +56,13 @@ public class Shark extends Animal
             foodLevel = 20;
         }
     }
-    
+
     /**
      * Another constructor for sharks.
      */
     public Shark()
     {}
-    
+
     /**
      * This allows us to create a new animal
      * @return Returns a reference of the animal we created
@@ -71,7 +71,7 @@ public class Shark extends Animal
     {
         return new Shark(randomAge,male,field, location, islandField);
     }
-    
+
     /**
      * This is what the fox does most of the time: it hunts for
      * rabbits. In the process, it might breed, die of hunger,
@@ -79,25 +79,28 @@ public class Shark extends Animal
      * @param field The field currently occupied.
      * @param newSharks A list to return newly born sharks.
      */
-    public void act(List<Animal> newSharks, Foodweb foodweb)
+    public void act(List<Animal> newSharks, Foodweb foodweb, boolean isDay)
     {
         incrementAge();
         incrementHunger();
         if(isAlive()) {
-            giveBirth(newSharks);            
-            // Move towards a source of food if found.
-            Location newLocation = findFood(foodweb);
-            if(newLocation == null) { 
-                // No food found - try to move to a free location.
-                newLocation = getMoveAbleLand();
-            }
-            // See if it was possible to move.
-            if(newLocation != null) {
-                setLocation(newLocation);
-            }
-            else {
-                // Overcrowding.
-                setDead();
+            if(isDay){
+                giveBirth(newSharks);            
+                // Move towards a source of food if found.
+
+                Location newLocation = findFood(foodweb);
+                if(newLocation == null) { 
+                    // No food found - try to move to a free location.
+                    newLocation = getMoveAbleLand();
+                }
+                // See if it was possible to move.
+                if(newLocation != null) {
+                    setLocation(newLocation);
+                }
+                else {
+                    // Overcrowding.
+                    setDead();
+                }
             }
         }
     }
@@ -112,7 +115,7 @@ public class Shark extends Animal
             setDead();
         }
     }
-    
+
     /**
      * Make this fox more hungry. This could result in the fox's death.
      */
@@ -135,23 +138,23 @@ public class Shark extends Animal
         // Get a list of adjacent free locations.
         Field field = getField();
         Field islandField = getIslandField();
-        
+
         List<Location> partners = field.adjacentLocations(getLocation());
         int births = breed();
         for(Location partner: partners){
-        if(field.getObjectAt(partner) instanceof Shark){            
-            Shark shark = (Shark) field.getObjectAt(partner); 
-            if(this.getGender() != shark.getGender()){
-                for(int b = 0; b < births && moveAbleLands().size() > 0; b++) {
-                    Location loc = moveAbleLands().remove(0);
-                    Shark young = new Shark(false, setGender(), field, loc, islandField);
-                    newSharks.add(young);
+            if(field.getObjectAt(partner) instanceof Shark){            
+                Shark shark = (Shark) field.getObjectAt(partner); 
+                if(this.getGender() != shark.getGender()){
+                    for(int b = 0; b < births && moveAbleLands().size() > 0; b++) {
+                        Location loc = moveAbleLands().remove(0);
+                        Shark young = new Shark(false, setGender(), field, loc, islandField);
+                        newSharks.add(young);
+                    }
                 }
             }
         }
-        }
     }
-        
+
     /**
      * Generate a number representing the number of births,
      * if it can breed.
@@ -173,7 +176,7 @@ public class Shark extends Animal
     {
         return age >= BREEDING_AGE;
     }
-    
+
     /**
      * @return The probability of the rabbit spawning
      */
@@ -181,7 +184,5 @@ public class Shark extends Animal
     {
         return Spawn_Probability;
     }
-    
-  
-}
 
+}

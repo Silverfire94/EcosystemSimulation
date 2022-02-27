@@ -8,19 +8,21 @@
 public class Water extends Land
 {
     private static int ID = 1;
+    private Plant plant;
     /**
      * Constructor for objects of class Water
      */
-    public Water(Field field, Location location)
+    public Water(Field field, Location location, Plant plant)
     {
-     super(field, location); 
+     super(field, location);
+     this.plant = plant;
     }
     
     public Water()
     {}
     
     public Land createLand(Field field, Location location){
-        return new Water(field, location);
+        return new Water(field, location, null);
     }
     
     public boolean matchId(int givenId){
@@ -29,5 +31,15 @@ public class Water extends Land
     
     public void ChangeId(int newId){
         ID = newId;
+    }
+    
+    public Plant getPlant()
+    {
+        return plant;
+    }
+    
+    public void addPlant(Plant plant)
+    {
+        this.plant = plant;
     }
 }

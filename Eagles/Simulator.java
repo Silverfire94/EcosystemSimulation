@@ -24,8 +24,12 @@ public class Simulator
     private List<Animal> animals;
     // List of lands in the islandField.
     private List<Land> lands;
+    // List of plants in the field
+    private List<Plant> plants;
     // List of animalTypes in the field
     private List<Animal> animalTypes;
+    // List of plantTypes in the field
+    private List<Plant> plantTypes;
     // List of landTypes in the islandField;
     private List<Land> landTypes; 
     //----------------------------------------//
@@ -43,7 +47,7 @@ public class Simulator
     private int step;
     // A graphical view of the simulation.
     private SimulatorView view;
-    
+
     private HashMap<Land, Location> x;
 
     /**
@@ -70,9 +74,9 @@ public class Simulator
 
         animals = new ArrayList<>();
         animalTypes = new ArrayList<>();
+        plantTypes = new ArrayList<>();
         lands = new ArrayList<>();
         landTypes = new ArrayList<>();
-        
 
         field = new Field(depth, width);
         islandField = new Field(depth, width);
@@ -86,9 +90,11 @@ public class Simulator
         view.setColor(Eagles.class, Color.MAGENTA);
         view.setColor(Fish.class, Color.ORANGE);
         view.setColor(Shark.class, Color.red);
+        
+        view.setColor(Grass.class, Color.GREEN);
 
         view.setColor(Water.class, Color.BLUE); 
-        view.setColor(Ground.class, Color.GREEN);
+        view.setColor(Ground.class, Color.getHSBColor(58, 29, 0));
         view.setColor(ShallowWater.class, Color.CYAN);
 
         // Putting all animal types in the animal types array.
@@ -98,6 +104,9 @@ public class Simulator
         animalTypes.add(new Eagles());
         animalTypes.add(new Fish());
         animalTypes.add(new Shark());
+        
+        // Putting all plant types in the plant types array.
+        plantTypes.add(new Grass());
 
         // Putting all land types in the land types array.
         landTypes.add(new Ground());
@@ -141,14 +150,23 @@ public class Simulator
     {
         step++;
 
+        //boolean isDay = (step % 2) > 0;
+
         // Provide space for newborn animals.
         List<Animal> newAnimals = new ArrayList<>();        
         // Let all Pythons act.
         for(Iterator<Animal> it = animals.iterator(); it.hasNext(); ) {
             Animal animal = it.next();
-            animal.act(newAnimals, foodweb);
+            animal.act(newAnimals, foodweb, Time.isDay(5, step));
             if(! animal.isAlive()) {
                 it.remove();
+            }
+        }
+        
+        for(Iterator<Land> it = lands.iterator(); it.hasNext(); ) {
+            Land land = it.next();
+            if(land.getPlant() != null){
+                land.getPlant().act(Time.isDay(5, step));
             }
         }
 
@@ -167,6 +185,7 @@ public class Simulator
         lands.clear();
         drawLand();
         updateLand();
+        populatePlants();
         populate();
 
         // Show the starting state in the view.
@@ -184,20 +203,44 @@ public class Simulator
         for(int row = 0; row < field.getDepth(); row++) {
             for(int col = 0; col < field.getWidth(); col++) {
                 //returns a random animal object.
-                Animal animal = animalTypes.get(rand.nextInt(6));
+                Animal animal = animalTypes.get(rand.nextInt(animalTypes.size()));
                 List<Class> spawnLand = animalLand.getLandMap().get(animal.getClass());
                 for(Class landClass : spawnLand){
-                if(rand.nextDouble() <= animal.getSpawn()) {
-                    //spawns the animal at the location and then adds the animal to the animal list.            
-                    Location location = new Location(row, col);
-                    Land typeOfLand = (Land) islandField.getObjectAt(row, col);
-                    if(typeOfLand.getClass() == landClass){
-                        animals.add(animal.createAnimal(true, animal.setGender(), field, location, islandField));
+                    if(rand.nextDouble() <= animal.getSpawn()) {
+                        //spawns the animal at the location and then adds the animal to the animal list.            
+                        Location location = new Location(row, col);
+                        Land typeOfLand = (Land) islandField.getObjectAt(row, col);
+                        if(typeOfLand.getClass() == landClass){
+                            animals.add(animal.createAnimal(true, animal.setGender(), field, location, islandField));
+                        }
                     }
                 }
             }
         }
     }
+    
+    private void populatePlants()
+    {
+        Random rand = Randomizer.getRandom();
+        AnimalLand plantLand = new AnimalLand();
+        field.clear();
+        for(int row = 0; row < field.getDepth(); row++) {
+            for(int col = 0; col < field.getWidth(); col++) {
+                //returns a random animal object.
+                Plant plant = plantTypes.get(rand.nextInt(plantTypes.size()));
+                List<Class> spawnLand = plantLand.getLandMap().get(plant.getClass());
+                for(Class landClass : spawnLand){
+                    if(rand.nextDouble() <= plant.getSpawn()) {
+                        //spawns the animal at the location and then adds the animal to the animal list.
+                        Location location = new Location(row, col);
+                        Land typeOfLand = (Land) islandField.getObjectAt(row, col);
+                        if(typeOfLand.getClass() == landClass){
+                            typeOfLand.addPlant(plant.createPlant(true));
+                        }
+                    }
+                }
+            }
+        }
     }
 
     /**
@@ -219,7 +262,7 @@ public class Simulator
             }   
         }
     }
-    
+
     public void updateLand()
     {
         for(Land land : lands){
@@ -228,10 +271,9 @@ public class Simulator
                 Iterator<Location> it = adjacent.iterator();
                 while(it.hasNext()){
                     Location where = it.next();
-                    Object adjacentLand = islandField.getObjectAt(where);
+                    Land adjacentLand = (Land) islandField.getObjectAt(where);
                     if(adjacentLand != null && adjacentLand.getClass() == Water.class){
-                        int i = lands.indexOf(land) + 2;
-                        System.out.println(i);
+                        int i = lands.indexOf(adjacentLand);
                         lands.set(i,landTypes.get(2).createLand(islandField, where));
                     }
                 } 
@@ -239,7 +281,6 @@ public class Simulator
         }
     }
 
-    
     /**
      * Pause for a given time.
      * @param millisec  The time to pause for, in milliseconds

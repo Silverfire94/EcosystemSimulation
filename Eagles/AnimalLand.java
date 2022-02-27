@@ -38,12 +38,16 @@ public class AnimalLand
         fishBiome.add(Water.class);
         fishBiome.add(ShallowWater.class);
         
+        List grassBiome = new ArrayList<Land>();
+        grassBiome.add(Ground.class);
+        
         landmap.put(Python.class, pythonBiome);
         landmap.put(Shark.class, sharkBiome);
         landmap.put(Pig.class, pigBiome);
         landmap.put(Eagles.class, eagleBiome);
         landmap.put(Human.class, humanBiome);
         landmap.put(Fish.class, fishBiome);
+        landmap.put(Grass.class, grassBiome);
     }
     
     public HashMap<Class, List<Class>> getLandMap(){

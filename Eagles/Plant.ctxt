@@ -1,0 +1,27 @@
+#BlueJ class context
+comment0.target=Plant
+comment0.text=\r\n\ Interface\ class\ Actor\ -\ write\ a\ description\ of\ the\ class\ here\r\n\r\n\ @author\ (your\ name\ here)\r\n\ @version\ (version\ number\ or\ date\ here)\r\n
+comment1.params=
+comment1.target=Plant()
+comment2.params=
+comment2.target=boolean\ isBig()
+comment2.text=\r\n\ Check\ whether\ the\ plant\ isBig\r\n\ @return\ true\ if\ the\ plant\ is\ big\r\n
+comment3.params=
+comment3.target=void\ setSmall()
+comment3.text=\r\n\ Indicate\ that\ the\ plant\ is\ no\ longer\ big\r\n
+comment4.params=
+comment4.target=void\ setBig()
+comment4.text=\r\n\ \r\n
+comment5.params=
+comment5.target=int\ getSize()
+comment5.text=\r\n\ @Return\ The\ size\ of\ the\ plant\r\n
+comment6.params=
+comment6.target=double\ getSpawn()
+comment6.text=\r\n\ This\ return\ the\ probability\ of\ spawning\ the\ plant\r\n
+comment7.params=randomSize
+comment7.target=Plant\ createPlant(boolean)
+comment7.text=\r\n\ Alls\ the\ animal\ to\ create\ new\ animals\r\n
+comment8.params=isDay
+comment8.target=void\ act(boolean)
+comment8.text=\r\n\ This\ controls\ how\ the\ plant\ acts\ every\ step\r\n
+numComments=9

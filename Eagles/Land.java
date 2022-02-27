@@ -11,7 +11,7 @@ public abstract class Land
     // instance variables - replace the example below with your own
     private int x;
     private Location location; 
-    private Field field; 
+    private Field field;
     
     private static int ID = 0;
     public Land(Field field, Location location){
@@ -55,4 +55,8 @@ public abstract class Land
     abstract public boolean matchId(int givenId);
     
     abstract public Land createLand(Field field, Location location);
+    
+    abstract public Plant getPlant();
+    
+    abstract public void addPlant(Plant plant);
 }

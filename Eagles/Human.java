@@ -7,7 +7,7 @@ import java.util.Iterator;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Human extends Animal
+public class Human extends Carnivore
 {
     // Characteristics shared by all humans (class variables).
 
@@ -53,7 +53,7 @@ public class Human extends Animal
             age = 0;
             foodLevel = 20;
         }
-        
+
         whenHungery = 70;
     }
 
@@ -79,25 +79,28 @@ public class Human extends Animal
      * @param field The field currently occupied.
      * @param newHuman A list to return newly born foxes.
      */
-    public void act(List<Animal> newHumans, Foodweb foodweb)
+    public void act(List<Animal> newHumans, Foodweb foodweb, boolean isDay)
     {
         incrementAge();
         incrementHunger();
         if(isAlive()) {
-            giveBirth(newHumans);            
-            // Move towards a source of food if found.
-            Location newLocation = findFood(foodweb);
-            if(newLocation == null) { 
-                // No food found - try to move to a free location.
-                newLocation = getMoveAbleLand();
-            }
-            // See if it was possible to move.
-            if(newLocation != null) {
-                setLocation(newLocation);
-            }
-            else {
-                // Overcrowding.
-                setDead();
+            if(isDay){
+                giveBirth(newHumans);            
+                // Move towards a source of food if found.
+
+                Location newLocation = findFood(foodweb);
+                if(newLocation == null) { 
+                    // No food found - try to move to a free location.
+                    newLocation = getMoveAbleLand();
+                }
+                // See if it was possible to move.
+                if(newLocation != null) {
+                    setLocation(newLocation);
+                }
+                else {
+                    // Overcrowding.
+                    setDead();
+                }
             }
         }
     }
@@ -141,20 +144,20 @@ public class Human extends Animal
         // Get a list of adjacent free locations.
         Field field = getField();
         Field islandField = getIslandField();
-        
+
         List<Location> partners = field.adjacentLocations(getLocation());
         int births = breed();
         for(Location partner: partners){
-        if(field.getObjectAt(partner) instanceof Human){            
-            Human human = (Human) field.getObjectAt(partner); 
-            if(this.getGender() != human.getGender()){
-                for(int b = 0; b < births && moveAbleLands().size() > 0; b++) {
-                    Location loc = moveAbleLands().remove(0);
-                    Human young = new Human(false, setGender(), field, loc, islandField);
-                    newHumans.add(young);
+            if(field.getObjectAt(partner) instanceof Human){            
+                Human human = (Human) field.getObjectAt(partner); 
+                if(this.getGender() != human.getGender()){
+                    for(int b = 0; b < births && moveAbleLands().size() > 0; b++) {
+                        Location loc = moveAbleLands().remove(0);
+                        Human young = new Human(false, setGender(), field, loc, islandField);
+                        newHumans.add(young);
+                    }
                 }
             }
-        }
         }
     }
 
@@ -187,5 +190,5 @@ public class Human extends Animal
     {
         return Spawn_Probability;
     }
-    
+
 }

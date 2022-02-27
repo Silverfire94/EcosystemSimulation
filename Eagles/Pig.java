@@ -8,7 +8,7 @@ import java.util.Random;
  * @author David J. Barnes and Michael Kölling
  * @version 2016.02.29 (2)
  */
-public class Pig extends Animal
+public class Pig extends Herbivore
 {
     // Characteristics shared by all Pigs (class variables).
 
@@ -20,14 +20,12 @@ public class Pig extends Animal
     private static final double BREEDING_PROBABILITY = 0.15;
     // The maximum number of births.
     private static final int MAX_LITTER_SIZE = 4;
-    
+
     // A shared random number generator to control breeding.
     //private static final Random rand = Randomizer.getRandom();
-    
+
     // The spawn probability of Pig
     private static double Spawn_Probability = 0.30;
-    
-    
 
     /**
      * Create a new Pig. A Pig may be created with age
@@ -43,15 +41,21 @@ public class Pig extends Animal
         age = 0;
         if(randomAge) {
             age = rand.nextInt(MAX_AGE);
+            foodLevel = rand.nextInt(40);
         }
+        else {
+            foodLevel = 20;
+        }
+        
+        whenHungery = 60;
     }
-    
+
     /**
      * Another constructor for Pigs. 
      */
     public Pig()
     {}
-    
+
     /**
      * This allows us to create a new animal
      * @return Returns a reference of the animal we created
@@ -60,25 +64,33 @@ public class Pig extends Animal
     {
         return new Pig(randomAge, male, field, location, islandField);
     }
-    
+
     /**
      * This is what the Pig does most of the time - it runs 
      * around. Sometimes it will breed or die of old age.
      * @param newPigs A list to return newly born Pigs.
      */
-    public void act(List<Animal> newPigs, Foodweb foodweb)
+    public void act(List<Animal> newPigs, Foodweb foodweb, boolean isDay)
     {
         incrementAge();
+        incrementHunger();
         if(isAlive()) {
-            giveBirth(newPigs);            
-            // Try to move into a free location.
-            Location newLocation = getMoveAbleLand();
-            if(newLocation != null) {
-                setLocation(newLocation);
-            }
-            else {
-                // Overcrowding.
-                setDead();
+            if(isDay){
+                giveBirth(newPigs);            
+                // Move towards a source of food if found.
+                Location newLocation = findFood(foodweb);
+                if(newLocation == null) { 
+                    // No food found - try to move to a free location.
+                    newLocation = getMoveAbleLand();
+                }
+                // See if it was possible to move.
+                if(newLocation != null) {
+                    setLocation(newLocation);
+                }
+                else {
+                    // Overcrowding.
+                    setDead();
+                }
             }
         }
     }
@@ -96,6 +108,18 @@ public class Pig extends Animal
     }
     
     /**
+     * Increase the hunger.
+     * This could result in the Pig's death
+     */
+    private void incrementHunger()
+    {
+        foodLevel--;
+        if(foodLevel <= 0) {
+            setDead();
+        }
+    }
+
+    /**
      * Check whether or not this Pig is to give birth at this step.
      * New births will be made into free adjacent locations.
      * @param newPigs A list to return newly born Pigs.
@@ -106,23 +130,23 @@ public class Pig extends Animal
         // Get a list of adjacent free locations.
         Field field = getField();
         Field islandField = getIslandField();
-        
+
         List<Location> partners = field.adjacentLocations(getLocation());
         int births = breed();
         for(Location partner: partners){
-        if(field.getObjectAt(partner) instanceof Pig){            
-            Pig pig = (Pig) field.getObjectAt(partner); 
-            if(this.getGender() != pig.getGender()){
-                for(int b = 0; b < births && moveAbleLands().size() > 0; b++) {
-                    Location loc = moveAbleLands().remove(0);
-                    Pig young = new Pig(false, setGender(), field, loc, islandField);
-                    newPigs.add(young);
+            if(field.getObjectAt(partner) instanceof Pig){            
+                Pig pig = (Pig) field.getObjectAt(partner); 
+                if(this.getGender() != pig.getGender()){
+                    for(int b = 0; b < births && moveAbleLands().size() > 0; b++) {
+                        Location loc = moveAbleLands().remove(0);
+                        Pig young = new Pig(false, setGender(), field, loc, islandField);
+                        newPigs.add(young);
+                    }
                 }
             }
         }
-        }
     }
-      
+
     /**
      * Generate a number representing the number of births,
      * if it can breed.
@@ -145,7 +169,7 @@ public class Pig extends Animal
     {
         return age >= BREEDING_AGE;
     }
-    
+
     /**
      * @return The probability of the Pig spawning
      */
@@ -153,5 +177,5 @@ public class Pig extends Animal
     {
         return Spawn_Probability;
     }
-    
+
 }

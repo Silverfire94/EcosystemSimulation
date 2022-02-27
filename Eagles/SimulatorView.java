@@ -26,7 +26,7 @@ public class SimulatorView extends JFrame
     private final String POPULATION_PREFIX = "Population: ";
     private JLabel stepLabel, population, infoLabel;
     private FieldView fieldView;
-    
+
     // A map for storing colors for participants in the simulation
     private Map<Class, Color> colors;
     // A statistics object computing and storing simulation information
@@ -42,27 +42,27 @@ public class SimulatorView extends JFrame
         stats = new FieldStats();
         colors = new LinkedHashMap<>();
 
-        setTitle("Fox and Rabbit Simulation");
+        setTitle("Coastal Simulation");
         stepLabel = new JLabel(STEP_PREFIX, JLabel.CENTER);
         infoLabel = new JLabel("  ", JLabel.CENTER);
         population = new JLabel(POPULATION_PREFIX, JLabel.CENTER);
-        
+
         setLocation(100, 50);
-        
+
         fieldView = new FieldView(height, width);
 
         Container contents = getContentPane();
-        
+
         JPanel infoPane = new JPanel(new BorderLayout());
-            infoPane.add(stepLabel, BorderLayout.WEST);
-            infoPane.add(infoLabel, BorderLayout.CENTER);
+        infoPane.add(stepLabel, BorderLayout.WEST);
+        infoPane.add(infoLabel, BorderLayout.CENTER);
         contents.add(infoPane, BorderLayout.NORTH);
         contents.add(fieldView, BorderLayout.CENTER);
         contents.add(population, BorderLayout.SOUTH);
         pack();
         setVisible(true);
     }
-    
+
     /**
      * Define a color to be used for a given class of animal.
      * @param animalClass The animal's Class object.
@@ -72,7 +72,7 @@ public class SimulatorView extends JFrame
     {   
         colors.put(animalClass, color);
     }
-    
+
     /**
      * Display a short information label at the top of the window.
      */
@@ -96,7 +96,7 @@ public class SimulatorView extends JFrame
         }
     }
 
-     /**
+    /**
      * Show the current status of the field.
      * @param step Which iteration step it is.
      * @param field The field whose status is to be displayed.
@@ -106,22 +106,28 @@ public class SimulatorView extends JFrame
         if(!isVisible()) {
             setVisible(true);
         }
-            
+
         stepLabel.setText(STEP_PREFIX + step);
         stats.reset();
-        
+
         fieldView.preparePaint();
 
         for(int row = 0; row < primaryField.getDepth(); row++) {
             for(int col = 0; col < primaryField.getWidth(); col++) {
                 Object animal = primaryField.getObjectAt(row, col);
-                Object land = secondaryField.getObjectAt(row, col);
+                Land land = (Land) secondaryField.getObjectAt(row, col);
                 if(animal != null) {
                     stats.incrementCount(animal.getClass());
                     fieldView.drawMark(row, col, getColor(animal.getClass()));
                 }
                 else if(land != null){
-                    fieldView.drawMark(row, col, getColor(land.getClass()));
+                    if(land.getPlant() != null && land.getPlant().isBig()){
+                        fieldView.drawMark(row, col, getColor(land.getPlant().getClass()));
+                    }
+                    else{
+                        fieldView.drawMark(row, col, getColor(land.getClass()));
+                    }
+
                 } else{
                     fieldView.drawMark(row, col, EMPTY_COLOR);
                 }
@@ -141,7 +147,7 @@ public class SimulatorView extends JFrame
     {
         return stats.isViable(field);
     }
-    
+
     /**
      * Provide a graphical view of a rectangular field. This is 
      * a nested class (a class defined inside a class) which
@@ -176,7 +182,7 @@ public class SimulatorView extends JFrame
         public Dimension getPreferredSize()
         {
             return new Dimension(gridWidth * GRID_VIEW_SCALING_FACTOR,
-                                 gridHeight * GRID_VIEW_SCALING_FACTOR);
+                gridHeight * GRID_VIEW_SCALING_FACTOR);
         }
 
         /**
@@ -200,7 +206,7 @@ public class SimulatorView extends JFrame
                 }
             }
         }
-        
+
         /**
          * Paint on grid location on this field in a given color.
          */

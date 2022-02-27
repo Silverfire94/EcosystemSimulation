@@ -4,9 +4,11 @@ import java.util.Iterator;
 public class ShallowWater extends Land
 {
     private static int ID = 2;
+    private Plant plant;
     
-    public ShallowWater(Field field, Location location){
-        super(field, location); 
+    public ShallowWater(Field field, Location location, Plant plant){
+        super(field, location);
+        this.plant = plant;
     }
     
     public ShallowWater()
@@ -15,7 +17,7 @@ public class ShallowWater extends Land
     }
     
     public Land createLand(Field field, Location location){
-        return new ShallowWater(field, location);
+        return new ShallowWater(field, location, null);
     }
     
     public boolean matchId(int givenId){
@@ -24,6 +26,16 @@ public class ShallowWater extends Land
     
     public void ChangeId(int newId){
         ID = newId;
+    }
+    
+    public Plant getPlant()
+    {
+        return plant;
+    }
+    
+    public void addPlant(Plant plant)
+    {
+        this.plant = plant;
     }
     
 }

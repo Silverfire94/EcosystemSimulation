@@ -60,7 +60,7 @@ public abstract class Animal
      * whatever it wants/needs to do.
      * @param newAnimals A list to receive newly born animals.
      */
-    abstract public void act(List<Animal> newAnimals, Foodweb foodweb);
+    abstract public void act(List<Animal> newAnimals, Foodweb foodweb, boolean isDay);
 
     /**
      * Check whether the animal is alive or not.
@@ -214,33 +214,35 @@ public abstract class Animal
         return isWeak;
     }
 
-    protected Location findFood(Foodweb foodweb)
-    {
-        Field field = getField();
-        Iterator<Location> it = moveAbleLands().iterator();
-        while(it.hasNext()) {
-            Location where = it.next();
-            Object animal = field.getObjectAt(where);
-            List<Food> foodtypes = foodweb.getFood(this.getClass());
-            for (Food food : foodtypes)
-            {
-                Class animaltype = food.getAnimalType();
-                if (animal != null && animal.getClass() == animaltype)
-                {
-                    Animal animalToEat = (Animal) animal;
-                    // Checks if this animal is strong against the food
-                    if(animalToEat.isAlive() && foodLevel < whenHungery &&
-                    (food.getStrongAgainst() || animalToEat.getIsWeak()))
-                    {
-                        animalToEat.setDead();
-                        foodLevel += food.getFoodValue();
-                        return where;
-                    }
-                }
-            }
-        }
-        return null;
-    }
+    abstract protected Location findFood(Foodweb foodweb);
+    
+    // protected Location findFood(Foodweb foodweb)
+    // {
+        // Field field = getField();
+        // Iterator<Location> it = moveAbleLands().iterator();
+        // while(it.hasNext()) {
+            // Location where = it.next();
+            // Object animal = field.getObjectAt(where);
+            // List<Food> foodtypes = foodweb.getFood(this.getClass());
+            // for (Food food : foodtypes)
+            // {
+                // Class animaltype = food.getAnimalType();
+                // if (animal != null && animal.getClass() == animaltype)
+                // {
+                    // Animal animalToEat = (Animal) animal;
+                    // // Checks if this animal is strong against the food
+                    // if(animalToEat.isAlive() && foodLevel < whenHungery &&
+                    // (food.getStrongAgainst() || animalToEat.getIsWeak()))
+                    // {
+                        // animalToEat.setDead();
+                        // foodLevel += food.getFoodValue();
+                        // return where;
+                    // }
+                // }
+            // }
+        // }
+        // return null;
+    // }
     
     
 

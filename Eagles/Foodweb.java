@@ -36,10 +36,14 @@ public class Foodweb
         sharkEats.add(new Food(Human.class, false, 20)); 
         sharkEats.add(new Food(Fish.class, true, 10));
         
+        List pigEats = new ArrayList<Food>();
+        pigEats.add(new Food(Grass.class, true, 10));
+        
         foodmap.put(Python.class, pythonEats);
         foodmap.put(Human.class, humanEats);
         foodmap.put(Eagles.class, eagleEats);
         foodmap.put(Shark.class, sharkEats);
+        foodmap.put(Pig.class, pigEats);
     }
     
     public List<Food> getFood(Class animalType)
