@@ -101,9 +101,9 @@ public class Simulator
 
         // Create a view of the state of each location in the field.
         view = new SimulatorView(depth, width);
-        view.setColor(Pig.class, Color.YELLOW);
+        view.setColor(Pig.class, Color.PINK);
         view.setColor(Python.class, Color.YELLOW);
-        view.setColor(Human.class, Color.PINK);
+        view.setColor(Human.class, Color.black);
         view.setColor(Eagles.class, Color.MAGENTA);
         view.setColor(Fish.class, Color.ORANGE);
         view.setColor(Shark.class, Color.red);
@@ -117,17 +117,17 @@ public class Simulator
         view.setColor(Seaweed.class, new Color(0, 0, 0, 0));
         
         // weather - Change the Alpha value to see the clouds and the rainy cloud.
-        view.setColor(Raining.class, new Color(15, 15, 15, 0));
-        view.setColor(Cloudy.class, new Color(128, 128, 128, 0));
+        view.setColor(Raining.class, new Color(15, 15, 15, 40));
+        view.setColor(Cloudy.class, new Color(128, 128, 128, 20));
         view.setColor(Sunny.class, new Color(0,0,0,0));
        
         // Putting all animal types in the animal types array.
-        //animalTypes.add(new Pig());
-       // animalTypes.add(new Python());
+        animalTypes.add(new Pig());
+        animalTypes.add(new Python());
         animalTypes.add(new Human());
-        //animalTypes.add(new Eagles());
+        animalTypes.add(new Eagles());
         animalTypes.add(new Fish());
-        //animalTypes.add(new Shark());
+        animalTypes.add(new Shark());
         
         // Putting all land types in the land types array.
         landTypes.add(new Ground());
@@ -136,7 +136,7 @@ public class Simulator
         
         // Putting all plant types in the plant types array.
         plantTypes.add(new Grass());
-        //plantTypes.add(new Seaweed());
+        plantTypes.add(new Seaweed());
         
         // Putting all weather types in the weather types array.
         weatherTypes.add(new Sunny());
@@ -180,7 +180,7 @@ public class Simulator
     public void simulateOneStep()
     {
         step++;
-
+        int day = 5;
         //boolean isDay = (step % 2) > 0;
 
         // Provide space for newborn animals.
@@ -188,7 +188,7 @@ public class Simulator
         // Let all Pythons act.
         for(Iterator<Animal> it = animals.iterator(); it.hasNext(); ) {
             Animal animal = it.next();
-            animal.act(newAnimals, foodweb, Time.isDay(5, step));
+            animal.act(newAnimals, foodweb, Time.isDay(day, step));
             if(! animal.isAlive()) {
                 it.remove();
             }
@@ -206,7 +206,7 @@ public class Simulator
         }
         // Add the newly born Pythones and Pythons to the main lists.
         animals.addAll(newAnimals);
-        view.showStatus(step, field, islandField);
+        view.showStatus(step/day*2, field, islandField);
     }
 
     /**
@@ -258,11 +258,10 @@ public class Simulator
         Random rand = Randomizer.getRandom();
         AnimalLand plantLand = new AnimalLand();
         field.clear();
-        List tempPlantList = new ArrayList<>();
-        tempPlantList.addAll(plantTypes);
         for(int row = 0; row < field.getDepth(); row++) {
             for(int col = 0; col < field.getWidth(); col++) {
                 //returns a random animal object.
+                List<Plant> tempPlantList = new ArrayList<>(plantTypes);
                 boolean planted = false;
                 while(!planted){
                     Plant plant = (Plant) tempPlantList.get(rand.nextInt(tempPlantList.size()));

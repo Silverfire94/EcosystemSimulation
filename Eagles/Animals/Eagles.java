@@ -19,9 +19,9 @@ public class Eagles extends Carnivore
     // Characteristics shared by all eagles (class variables).
 
     // The age at which a eagle can start to breed.
-    private static final int BREEDING_AGE = 18;
+    private static final int BREEDING_AGE = 12;
     // The age to which a eagle can live.
-    private static final int MAX_AGE = 200;
+    private static final int MAX_AGE = 2000;
     // The likelihood of a eagle breeding.
     private static final double BREEDING_PROBABILITY = 0.2;
     // The maximum number of births.

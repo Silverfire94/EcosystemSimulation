@@ -21,9 +21,9 @@ public class Pig extends Herbivore
     // The age at which a Pig can start to breed.
     private static final int BREEDING_AGE = 15;
     // The age to which a Pig can live.
-    private static final int MAX_AGE = 50;
+    private static final int MAX_AGE = 500;
     // The likelihood of a Pig breeding.
-    private static final double BREEDING_PROBABILITY = 0.15;
+    private static final double BREEDING_PROBABILITY = 0.05;
     // The maximum number of births.
     private static final int MAX_LITTER_SIZE = 2;
     
@@ -34,7 +34,7 @@ public class Pig extends Herbivore
     //private static final Random rand = Randomizer.getRandom();
 
     // The spawn probability of Pig
-    private static double Spawn_Probability = 0.10;
+    private static double Spawn_Probability = 0.20;
 
     /**
      * Create a new Pig. A Pig may be created with age

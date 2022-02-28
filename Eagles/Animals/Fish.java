@@ -21,9 +21,9 @@ public class Fish extends Herbivore
     // The age at which a rabbit can start to breed.
     private static final int BREEDING_AGE = 5;
     // The age to which a rabbit can live.
-    private static final int MAX_AGE = 60;
+    private static final int MAX_AGE = 600;
     // The likelihood of a rabbit breeding.
-    private static final double BREEDING_PROBABILITY = 0.12;
+    private static final double BREEDING_PROBABILITY = 0.06;
     // The maximum number of births.
     private static final int MAX_LITTER_SIZE = 5;
 
@@ -31,7 +31,7 @@ public class Fish extends Herbivore
     //private static final Random rand = Randomizer.getRandom();
 
     // The spawn probability of Fish
-    private static double Spawn_Probability = 0.16;
+    private static double Spawn_Probability = 0.32;
 
     /**
      * Create a new rabbit. A rabbit may be created with age

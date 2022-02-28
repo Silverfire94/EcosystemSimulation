@@ -7,5 +7,5 @@ comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Raining\r\n
 comment2.params=givenId
 comment2.target=boolean\ matchId(int)
 comment3.params=
-comment3.target=Weather.Weather\ createWeather()
+comment3.target=Weather\ createWeather()
 numComments=4

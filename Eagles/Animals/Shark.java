@@ -21,7 +21,7 @@ public class Shark extends Carnivore
     // The age at which a fox can start to breed.
     private static final int BREEDING_AGE = 15;
     // The age to which a fox can live.
-    private static final int MAX_AGE = 150;
+    private static final int MAX_AGE = 1500;
     // The likelihood of a fox breeding.
     private static final double BREEDING_PROBABILITY = 0.16;
     // The maximum number of births.
@@ -34,7 +34,7 @@ public class Shark extends Carnivore
     //private static final Random rand = Randomizer.getRandom();
 
     // The spawn probability of fox
-    private static double Spawn_Probability = 0.15;
+    private static double Spawn_Probability = 0.30;
 
     // Individual characteristics (instance fields).
 

@@ -20,7 +20,7 @@ public class Human extends Carnivore
     // The age at which a human can start to breed.
     private static final int BREEDING_AGE = 18;
     // The age to which a human can live.
-    private static final int MAX_AGE = 120;
+    private static final int MAX_AGE = 4000;
     // The likelihood of a human breeding.
     private static final double BREEDING_PROBABILITY = 0.08;
     // The maximum number of births.
@@ -34,7 +34,7 @@ public class Human extends Carnivore
     //private static final Random rand = Randomizer.getRandom();
 
     // The spawn probability of human
-    private static double Spawn_Probability = 0.10;
+    private static double Spawn_Probability = 0.20;
 
     // Individual characteristics (instance fields).
 

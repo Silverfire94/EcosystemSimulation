@@ -1,20 +1,20 @@
 #BlueJ package file
-dependency1.from=Fish
+dependency1.from=Carnivore
 dependency1.to=Animal
 dependency1.type=UsesDependency
-dependency2.from=Carnivore
+dependency2.from=Python
 dependency2.to=Animal
 dependency2.type=UsesDependency
-dependency3.from=Human
+dependency3.from=Shark
 dependency3.to=Animal
 dependency3.type=UsesDependency
-dependency4.from=Shark
+dependency4.from=Human
 dependency4.to=Animal
 dependency4.type=UsesDependency
 dependency5.from=Pig
 dependency5.to=Animal
 dependency5.type=UsesDependency
-dependency6.from=Python
+dependency6.from=Fish
 dependency6.to=Animal
 dependency6.type=UsesDependency
 dependency7.from=Eagles
