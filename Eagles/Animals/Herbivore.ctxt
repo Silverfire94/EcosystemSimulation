@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=Herbivore
+comment0.text=\r\n\ Abstract\ class\ Herbivore\ -\ write\ a\ description\ of\ the\ class\ here\r\n\r\n\ @author\ (your\ name\ here)\r\n\ @version\ (version\ number\ or\ date\ here)\r\n
+comment1.params=male\ field\ location\ islandField
+comment1.target=Herbivore(boolean,\ Utililty.Field,\ Utililty.Location,\ Utililty.Field)
+comment2.params=
+comment2.target=Herbivore()
+comment3.params=foodweb
+comment3.target=Utililty.Location\ findFood(Utililty.Foodweb)
+numComments=4
