@@ -3,21 +3,20 @@ package Plants;
 import Utility.*;
 import Lands.Land;
 /**
- * Write a description of class Grass here.
+ * This simulates how grass acts in the simulation.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Mark Emmanuel and Vaibhavkumar Patel
+ * @version 2.0
  */
 public class Grass extends Plant
 {
-    // instance variables - replace the example below with your own
-    // The likelyhood of the plant spawning
+    // The likelyhood of the plant spawning.
     private static double spawnProbability = 1;
-    // The limit of its size
+    // The limit of its size.
     private static final int SIZELIMIT = 10;
-    // The growth rate
+    // The growth rate.
     private int growthRate = 1;
-    
+    // Its location in the islandField.
     private Location location;
 
     /**
@@ -33,7 +32,7 @@ public class Grass extends Plant
     }
     
     /**
-     * 
+     * A dummy constuctor.
      */
     public Grass()
     {
@@ -58,7 +57,11 @@ public class Grass extends Plant
     }
 
     /**
-     * This is runs every step
+     * Checks if it is daytime before growing the plant.
+     * Additionally checks the weather at that location and changes the growth rate.
+     * 
+     * @param isDay True if it is daytime.
+     * @param islandField The field in which the plant is stored in.
      */
     public void act(boolean isDay, Field islandField)
     {
@@ -85,7 +88,7 @@ public class Grass extends Plant
     }
     
     /**
-     * Indicate that the plant is no longer big
+     * Indicate that the plant is no longer big.
      */
     public void setSmall()
     {

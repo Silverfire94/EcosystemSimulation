@@ -1,8 +1,8 @@
 #BlueJ package file
-dependency1.from=Raining
+dependency1.from=Cloudy
 dependency1.to=Weather
 dependency1.type=UsesDependency
-dependency2.from=Cloudy
+dependency2.from=Raining
 dependency2.to=Weather
 dependency2.type=UsesDependency
 dependency3.from=Sunny

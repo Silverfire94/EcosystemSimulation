@@ -162,7 +162,7 @@ public abstract class Animal
         return islandField;
     }
 
-    //--------------Protected method ----------//
+    //--------------Protected methods ----------//
     /**
      * This method returns the free location around an animal that it can walk on.
      * @return List<Location> that are free for animal to move to.

@@ -1,8 +1,8 @@
 #BlueJ class context
 comment0.target=Python
-comment0.text=\r\n\ A\ simple\ model\ of\ a\ Python.\r\n\ Pythons\ age,\ move,\ eat\ rabbits,\ and\ die.\r\n\ \r\n\ @author\ David\ J.\ Barnes\ and\ Michael\ K\u00F6lling\r\n\ @version\ 2016.02.29\ (2)\r\n
+comment0.text=\r\n\ A\ simple\ model\ of\ a\ Python.\r\n\ A\ Python\ eats\ weak\ pigs,\ and\ Fishes.\r\n\ \r\n\ @author\ David\ J.\ Barnes\ and\ Michael\ K\u00F6lling\r\n\ @version\ 2016.02.29\ (2)\r\n
 comment1.params=randomAge\ male\ field\ location\ islandField
-comment1.target=Python(boolean,\ boolean,\ Utililty.Field,\ Utililty.Location,\ Utililty.Field)
+comment1.target=Python(boolean,\ boolean,\ Utility.Field,\ Utility.Location,\ Utility.Field)
 comment1.text=\r\n\ Create\ a\ Python.\ A\ Python\ can\ be\ created\ as\ a\ new\ born\ (age\ zero\r\n\ and\ not\ hungry)\ or\ with\ a\ random\ age\ and\ food\ level.\r\n\ \r\n\ @param\ randomAge\ If\ true,\ the\ Python\ will\ have\ random\ age\ and\ hunger\ level.\r\n\ @param\ field\ The\ field\ currently\ occupied.\r\n\ @param\ location\ The\ location\ within\ the\ field.\r\n
 comment10.params=
 comment10.target=double\ getSpawn()
@@ -11,10 +11,10 @@ comment2.params=
 comment2.target=Python()
 comment2.text=\r\n\ Another\ constructor\ for\ Pythons.\r\n
 comment3.params=randomAge\ male\ field\ location\ islandField
-comment3.target=Animal\ createAnimal(boolean,\ boolean,\ Utililty.Field,\ Utililty.Location,\ Utililty.Field)
+comment3.target=Animal\ createAnimal(boolean,\ boolean,\ Utility.Field,\ Utility.Location,\ Utility.Field)
 comment3.text=\r\n\ This\ allows\ us\ to\ create\ a\ new\ animal\r\n\ @return\ Returns\ a\ reference\ of\ the\ animal\ we\ created\r\n
 comment4.params=newPythons\ foodweb\ isDay
-comment4.target=void\ act(java.util.List,\ Utililty.Foodweb,\ boolean)
+comment4.target=void\ act(java.util.List,\ Utility.Foodweb,\ boolean)
 comment4.text=\r\n\ This\ is\ what\ the\ Python\ does\ most\ of\ the\ time\:\ it\ hunts\ for\r\n\ rabbits.\ In\ the\ process,\ it\ might\ breed,\ die\ of\ hunger,\r\n\ or\ die\ of\ old\ age.\r\n\ @param\ field\ The\ field\ currently\ occupied.\r\n\ @param\ newPythons\ A\ list\ to\ return\ newly\ born\ Pythons.\r\n
 comment5.params=
 comment5.target=void\ incrementAge()

@@ -4,14 +4,13 @@ import java.util.Random;
 import Utility.*;
 
 /**
- * Interface class Actor - write a description of the class here
+ * This simulates how a plant behaves in the simulation.
  *
- * @author (your name here)
- * @version (version number or date here)
+ * @author Mark Emmanuel and Vaibhavkumar Patel
+ * @version 2.0
  */
 public abstract class Plant
 {
-    // instance variables - replace the example below with your own
     // Whether the plant is big enough to display
     private boolean isBig;
     // The size of the plant
@@ -20,14 +19,18 @@ public abstract class Plant
     protected int whenThirsty;
     // A shared random number generator to control the begining size.
     protected static final Random rand = Randomizer.getRandom();
+    
+    /**
+     * Constructor for creating Plant objects.
+     */
     public Plant()
     {
         isBig = true;
     }
     
     /**
-     * Check whether the plant isBig
-     * @return true if the plant is big
+     * Check whether the plant isBig.
+     * @return true if the plant is big.
      */
     public boolean isBig()
     {
@@ -35,7 +38,7 @@ public abstract class Plant
     }
 
     /**
-     * Indicate that the plant is no longer big
+     * Indicate that the plant is no longer big.
      */
     public void setSmall()
     {
@@ -43,7 +46,7 @@ public abstract class Plant
     }
     
     /**
-     * 
+     * This sets that the plant is big enough.
      */
     protected void setBig()
     {
@@ -51,7 +54,7 @@ public abstract class Plant
     }
     
     /**
-     * @Return The size of the plant
+     * @Return The size of the plant.
      */
     protected int getSize()
     {
@@ -59,17 +62,22 @@ public abstract class Plant
     }
     
     /**
-     * This return the probability of spawning the plant
+     * @Return The probability of the plant spawning.
      */
     abstract public double getSpawn();
     
     /**
-     * Alls the animal to create new animals
+     * Creates a new Plant object.
+     * @param randomSize True if the we want the size to be random.
+     * @param location The location at where plant is stored at.
+     * @Return The plant object.
      */
     abstract public Plant createPlant(boolean randomSize , Location location);
 
     /**
-     * This controls how the plant acts every step
+     * This controls how the plant acts every step.
+     * @param isDay True if it is daytime.
+     * @param islandField The field in which the plant is stored.
      */    
     abstract public void act(boolean isDay, Field islandField);
 }

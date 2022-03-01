@@ -4,25 +4,24 @@ package Plants;
 import Utility.*;
 import Lands.Land;
 /**
- * Write a description of class Seaweed here.
+ * This simulates how Seaweed acts in the simulation.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Mark Emmanuel and Vaibhavkumar Patel
+ * @version 2.0
  */
 public class Seaweed extends Plant
 {
-    // instance variables - replace the example below with your own
-    // The likelyhood of the plant spawning
+    // The likelyhood of the plant spawning.
     private static double spawnProbability = 1;
-    // The limit of its size
+    // The limit of its size.
     private static final int SIZELIMIT = 15;
-    // The growth rate
+    // The growth rate.
     private int growthRate = 1;
-    
+    // The location of the plant.
     private Location location;
 
     /**
-     * Constructor for objects of class Grass
+     * Constructor for objects of class Grass.
      */
     public Seaweed(boolean randomSize, Location location)
     {
@@ -34,7 +33,7 @@ public class Seaweed extends Plant
     }
     
     /**
-     * 
+     * A dummy constructor.
      */
     public Seaweed()
     {
@@ -42,7 +41,7 @@ public class Seaweed extends Plant
     }
 
     /**
-     * @Return The spawn probability of grass
+     * @Return The spawn probability of grass.
      */
     public double getSpawn()
     {
@@ -50,8 +49,10 @@ public class Seaweed extends Plant
     }
 
     /**
-     * This creates new grass
-     * @Return The new Grass object
+     * This creates new grass.
+     * @param randomSize True if the size should be random.
+     * @param location The location where the plant will be stored at.
+     * @Return The new Grass object.
      */
     public Plant createPlant(boolean randomSize, Location location)
     {
@@ -59,8 +60,10 @@ public class Seaweed extends Plant
     }
 
     /**
-     * This method is for the actions taken by the obejct of this 
-     * class during each step.
+     * This method is for the actions taken by the plant
+     * during each step.
+     * @param isDay True if it is dayTime.
+     * @param islandField The field in which the plant is stored in. 
      */
     public void act(boolean isDay, Field islandField)
     {      

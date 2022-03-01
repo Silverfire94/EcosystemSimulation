@@ -1,13 +1,16 @@
 #BlueJ class context
 comment0.target=Pigomenalla
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ PigDisease\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ This\ simulates\ a\ disease\ that\ only\ affects\ pigs.\r\n\r\n\ @author\ Mark\ Emmanuel\ and\ Vaibhavkumar\ Patel\r\n\ @version\ 2.0\r\n
 comment1.params=
 comment1.target=Pigomenalla()
 comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ PigDisease\r\n
 comment2.params=
 comment2.target=double\ getSpawn()
+comment2.text=\r\n\ @Return\ The\ spawn\ probability\ of\ the\ disease.\r\n
 comment3.params=
 comment3.target=Disease\ createDisease()
+comment3.text=\r\n\ Creates\ a\ new\ Pigomenalla\ object.\r\n\ @Return\ A\ Pigomenalla\ object.\r\n
 comment4.params=
 comment4.target=double\ getSpreadProbability()
+comment4.text=\r\n\ @Return\ The\ probability\ of\ the\ disease\ spreading.\r\n
 numComments=5

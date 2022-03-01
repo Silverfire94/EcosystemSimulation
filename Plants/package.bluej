@@ -1,8 +1,8 @@
 #BlueJ package file
-dependency1.from=Seaweed
+dependency1.from=Grass
 dependency1.to=Plant
 dependency1.type=UsesDependency
-dependency2.from=Grass
+dependency2.from=Seaweed
 dependency2.to=Plant
 dependency2.type=UsesDependency
 objectbench.height=136

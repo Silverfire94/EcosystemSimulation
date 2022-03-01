@@ -5,10 +5,11 @@ import Utility.Field;
 import Utility.Location;
 import ActOfNature.Weather;
 /**
- * Abstract class Land - write a description of the class here
+ * Objects of this class store plants and weather that are
+ * at this location.
  *
- * @author (your name here)
- * @version (version number or date here)
+ * @author Mark Emmanuel and Vaibhavkumar Patel
+ * @version 2.0
  */
 public abstract class Land
 {

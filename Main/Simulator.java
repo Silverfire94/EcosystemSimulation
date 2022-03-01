@@ -43,7 +43,7 @@ public class Simulator
     private List<Weather> weatherTypes;
     // List of DiseaseTypes in the field.
     private List<Disease> diseaseTypes;
-    //----------------------------------------/
+    //----------------------------------------//
     // The food web of the ecosystem
     private Foodweb foodweb;
     //----------------------------------------//

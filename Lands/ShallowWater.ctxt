@@ -1,11 +1,11 @@
 #BlueJ class context
 comment0.target=ShallowWater
 comment1.params=field\ location\ plant\ weather
-comment1.target=ShallowWater(Utililty.Field,\ Utililty.Location,\ Plants.Plant,\ ActOfNature.Weather)
+comment1.target=ShallowWater(Utility.Field,\ Utility.Location,\ Plants.Plant,\ ActOfNature.Weather)
 comment2.params=
 comment2.target=ShallowWater()
 comment3.params=field\ location
-comment3.target=Land\ createLand(Utililty.Field,\ Utililty.Location)
+comment3.target=Land\ createLand(Utility.Field,\ Utility.Location)
 comment4.params=givenId
 comment4.target=boolean\ matchId(int)
 comment5.params=

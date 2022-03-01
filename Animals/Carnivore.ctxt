@@ -1,12 +1,13 @@
 #BlueJ class context
 comment0.target=Carnivore
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ Herbivore\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
-comment1.params=male\ field\ location\ islandField
-comment1.target=Carnivore(boolean,\ Utililty.Field,\ Utililty.Location,\ Utililty.Field)
-comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Herbivore\r\n
+comment0.text=\r\n\ This\ class\ models\ specific\ methods\ and\ attributes\ only\ \r\n\ related\ to\ the\ carnivore's\ in\ the\ simulation.\r\n\r\n\ @author\ David\ J.\ Barnes,\ Michael\ K\u00F6lling,\ Vaibhavkumar\ patel(k21076223)\r\n\ and\ mark\ Emmanuel(k21009638).\r\n\ @version\ 2022.03.01\ (3)\r\n
+comment1.params=male\ animalField\ location\ islandField
+comment1.target=Carnivore(boolean,\ Utility.Field,\ Utility.Location,\ Utility.Field)
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Canivore\r\n
 comment2.params=
 comment2.target=Carnivore()
 comment2.text=\r\n\ Dummy\ Constructor\r\n
 comment3.params=foodweb
-comment3.target=Utililty.Location\ findFood(Utililty.Foodweb)
+comment3.target=Utility.Location\ findFood(Utility.Foodweb)
+comment3.text=\r\n\ THis\ method\ return\ the\ location\ at\ which\ there\ is\ food.\r\n\ @param\ foodweb\ this\ is\ the\ web\ of\ what\ animal\ eats\ what.\r\n
 numComments=4
