@@ -1,8 +1,9 @@
 #BlueJ class context
 comment0.target=AnimalLand
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ AnimalLand\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ This\ holds\ what\ biome\ can\ each\ organism\ exist\ in.\r\n\r\n\ @author\ Mark\ Emmanuel\ and\ Vaibhavkumar\ Patel\r\n\ @version\ 2.0\r\n
 comment1.params=
 comment1.target=AnimalLand()
 comment2.params=
 comment2.target=java.util.HashMap\ getLandMap()
+comment2.text=\r\n\ @Return\ The\ hashMap\ linking\ an\ organism\ and\ the\ lands\ it\ can\ live\ on.\r\n
 numComments=3

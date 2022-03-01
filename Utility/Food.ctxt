@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Food
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ Food\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ Describes\ how\ the\ predator\ interacts\ with\ the\ prey.\r\n\r\n\ @author\ Mark\ Emmanuel\ and\ Vaibhavkumar\ Patel\r\n\ @version\ 2.0\r\n
 comment1.params=foodType\ strongAgainst\ foodValue
 comment1.target=Food(java.lang.Class,\ boolean,\ int)
 comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Food\r\n

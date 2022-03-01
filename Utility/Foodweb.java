@@ -14,10 +14,15 @@ import Plants.*;
  */
 public class Foodweb
 {
+    // This hashMap what animals each animal can eat.
     private HashMap<Class, List<Food>> foodmap;
     
+    /**
+     * Constructor for creating Foodweb objects.
+     */
     public Foodweb(){
         foodmap = new HashMap<>();
+        
         List pythonEats = new ArrayList<Food>();
         pythonEats.add(new Food(Pig.class, false, 50));
         pythonEats.add(new Food(Fish.class, true, 30));
@@ -44,6 +49,7 @@ public class Foodweb
         List fishEats = new ArrayList<Food>();
         fishEats.add(new Food(Seaweed.class, true, 10));
         
+        // This adds each list to the HashMap
         foodmap.put(Python.class, pythonEats);
         foodmap.put(Human.class, humanEats);
         foodmap.put(Eagles.class, eagleEats);
@@ -52,6 +58,11 @@ public class Foodweb
         foodmap.put(Fish.class, fishEats);
     }
     
+    /**
+     * This gives us a list of organisms that the animal can eat.
+     * @param animalType The class of the animal, whose prey we want.
+     * @Return List of classes that are prey to the animal.
+     */
     public List<Food> getFood(Class animalType)
     {
         return foodmap.get(animalType);

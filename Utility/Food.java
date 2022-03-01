@@ -1,15 +1,18 @@
 package Utility;
 /**
- * Write a description of class Food here.
+ * Describes how the predator interacts with the prey.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Mark Emmanuel and Vaibhavkumar Patel
+ * @version 2.0
  */
 public class Food
 {
-    // instance variables - replace the example below with your own
+    // Class of the prey.
     private Class foodType;
+    // True if the organism doesn't need to be weak.
     private boolean strongAgainst;
+    // The amount of food that the organism recieves when
+    // eating the prey.
     private int foodValue;
 
     /**

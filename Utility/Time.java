@@ -1,15 +1,12 @@
 package Utility;
 /**
- * Write a description of class Time here.
+ * Used to define methods for describing Time.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Mark Emmanuel and Vaibhavkumar Patel
+ * @version 2.0
  */
 public class Time
 {
-    // instance variables - replace the example below with your own
-    private int x;
-
     /**
      * Constructor for objects of class Time
      */
@@ -19,13 +16,20 @@ public class Time
     }
 
     /**
-     * 
+     * @param dayLengthInSteps How long we want daylight hours to be.
+     * @param steps The total number of steps that has occurered.
+     * @Return True if it is dayTime.
      */
     public static boolean isDay(int dayLengthInSteps, int steps)
     {
         return (steps/dayLengthInSteps + 1) % 2 > 0;
     }
     
+    /**
+     * @param dayLengthInSteps How long we want a day to be.
+     * @param steps The total number of steps that has occurered.
+     * @Return True if a whole day has passed.
+     */
     public static boolean isDay2(int dayLengthInStep , int steps){
         return (steps % dayLengthInStep == 0);
     }

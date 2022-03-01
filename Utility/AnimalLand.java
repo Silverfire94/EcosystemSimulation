@@ -8,10 +8,10 @@ import Lands.*;
 import Plants.*;
 
 /**
- * Write a description of class AnimalLand here.
+ * This holds what biome can each organism exist in.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Mark Emmanuel and Vaibhavkumar Patel
+ * @version 2.0
  */
 public class AnimalLand
 {
@@ -19,6 +19,7 @@ public class AnimalLand
  
     public AnimalLand(){
         landmap = new HashMap<>();
+        
         List pythonBiome = new ArrayList<Land>();
         pythonBiome.add(Ground.class);
         pythonBiome.add(ShallowWater.class);
@@ -60,6 +61,9 @@ public class AnimalLand
         landmap.put(Seaweed.class, seaweedBiome);
     }
     
+    /**
+     * @Return The hashMap linking an organism and the lands it can live on.
+     */
     public HashMap<Class, List<Class>> getLandMap(){
         return landmap;
     }
