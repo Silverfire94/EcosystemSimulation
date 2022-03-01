@@ -5,6 +5,8 @@ import javax.swing.*;
 
 import Lands.Land;
 import Plants.*;
+import Animals.Pig;
+import Animals.Human;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -115,16 +117,17 @@ public class SimulatorView extends JFrame
         stats.reset();
 
         fieldView.preparePaint();
-        
+
         for(int row = 0; row < primaryField.getDepth(); row++) {
             for(int col = 0; col < primaryField.getWidth(); col++) {
                 Object animal = primaryField.getObjectAt(row, col);
                 Land land = (Land) secondaryField.getObjectAt(row, col);
-                
+
                 //land, plant, animals and then weather(transparent). 
                 if(animal != null) {
-                    stats.incrementCount(animal.getClass());
-                    fieldView.drawMark(row, col, getColor(animal.getClass()));
+                    
+                        stats.incrementCount(animal.getClass());
+                        fieldView.drawMark(row, col, getColor(animal.getClass()));
                 }
                 else if(land != null){
                     fieldView.drawMark(row, col, getColor(land.getClass()));
@@ -135,7 +138,7 @@ public class SimulatorView extends JFrame
                     fieldView.drawMark(row, col, EMPTY_COLOR);
                 }
                 if(land != null && land.getWeather() != null){
-                        fieldView.drawMark(row, col, getColor(land.getWeather().getClass()));
+                    fieldView.drawMark(row, col, getColor(land.getWeather().getClass()));
                 }
             }
         }

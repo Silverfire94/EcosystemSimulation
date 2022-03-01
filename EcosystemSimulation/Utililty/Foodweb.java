@@ -10,6 +10,7 @@ import Animals.Pig;
 import Animals.Python;
 import Animals.Shark;
 import Plants.Grass;
+import Plants.Seaweed;
 
 /**
  * This class maps all the animals and what they eat. 
@@ -24,7 +25,8 @@ public class Foodweb
     public Foodweb(){
         foodmap = new HashMap<>();
         List pythonEats = new ArrayList<Food>();
-        pythonEats.add(new Food(Pig.class, true, 50));
+        pythonEats.add(new Food(Pig.class, false, 50));
+        pythonEats.add(new Food(Fish.class, true, 30));
         
         List humanEats = new ArrayList<Food>();
         humanEats.add(new Food(Pig.class, true, 40));
@@ -36,6 +38,7 @@ public class Foodweb
         eagleEats.add(new Food(Pig.class, true, 40));
         eagleEats.add(new Food(Python.class, false, 40));
         eagleEats.add(new Food(Human.class, false, 50));
+        eagleEats.add(new Food(Fish.class, true, 30));
         
         List sharkEats = new ArrayList<Food>(); 
         sharkEats.add(new Food(Human.class, false, 40)); 
@@ -44,11 +47,15 @@ public class Foodweb
         List pigEats = new ArrayList<Food>();
         pigEats.add(new Food(Grass.class, true, 10));
         
+        List fishEats = new ArrayList<Food>();
+        fishEats.add(new Food(Seaweed.class, true, 10));
+        
         foodmap.put(Python.class, pythonEats);
         foodmap.put(Human.class, humanEats);
         foodmap.put(Eagles.class, eagleEats);
         foodmap.put(Shark.class, sharkEats);
         foodmap.put(Pig.class, pigEats);
+        foodmap.put(Fish.class, fishEats);
     }
     
     public List<Food> getFood(Class animalType)
