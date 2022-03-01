@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=Sunny
+comment0.text=\r\n\ This\ simulates\ sunny\ weather.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=
+comment1.target=Sunny()
+comment1.text=\r\n\ \r\n
+comment2.params=givenId
+comment2.target=boolean\ matchId(int)
+comment3.params=
+comment3.target=Weather\ createWeather()
+numComments=4
