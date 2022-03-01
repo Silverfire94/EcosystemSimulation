@@ -1,0 +1,17 @@
+#BlueJ class context
+comment0.target=PerlinNoise
+comment0.text=\r\n\ For\ detailed\ info\ and\ implementation\ see\:\ <a\ href\="http\://devmag.org.za/2009/04/25/perlin-noise/">Perlin-Noise</a>\r\n
+comment1.params=
+comment1.target=PerlinNoise()
+comment2.params=width\ height\ octaveCount\ persistence\ seed
+comment2.target=float[][]\ generatePerlinNoise(int,\ int,\ int,\ float,\ long)
+comment2.text=\r\n\ @param\ width\ \ \ \ \ \ \ width\ of\ noise\ array\r\n\ @param\ height\ \ \ \ \ \ height\ of\ noise\ array\r\n\ @param\ octaveCount\ numbers\ of\ layers\ used\ for\ blending\ noise\r\n\ @param\ persistence\ value\ of\ impact\ each\ layer\ get\ while\ blending\r\n\ @param\ seed\ \ \ \ \ \ \ \ used\ for\ randomizer\r\n\ @return\ float\ array\ containing\ calculated\ "Perlin-Noise"\ values\r\n
+comment3.params=base\ width\ height\ octave
+comment3.target=float[][]\ generatePerlinNoiseLayer(float[][],\ int,\ int,\ int)
+comment3.text=\r\n\ @param\ base\ \ \ base\ random\ float\ array\r\n\ @param\ width\ \ width\ of\ noise\ array\r\n\ @param\ height\ height\ of\ noise\ array\r\n\ @param\ octave\ current\ layer\r\n\ @return\ float\ array\ containing\ calculated\ "Perlin-Noise-Layer"\ values\r\n
+comment4.params=a\ b\ alpha
+comment4.target=float\ interpolate(float,\ float,\ float)
+comment4.text=\r\n\ @param\ a\ \ \ \ \ value\ of\ point\ a\r\n\ @param\ b\ \ \ \ \ value\ of\ point\ b\r\n\ @param\ alpha\ determine\ which\ value\ has\ more\ impact\ (closer\ to\ 0\ ->\ a,\ closer\ to\ 1\ ->\ b)\r\n\ @return\ interpolated\ value\r\n
+comment5.params=args
+comment5.target=void\ main(java.lang.String[])
+numComments=6
