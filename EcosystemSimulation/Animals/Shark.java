@@ -54,12 +54,13 @@ public class Shark extends Carnivore
         super(male, field, location, islandField);
         if(randomAge) {
             age = rand.nextInt(MAX_AGE);
-            foodLevel = rand.nextInt(40);
         }
         else {
             age = 0;
-            foodLevel = 20;
         }
+        
+        foodLevel = rand.nextInt(40);
+        whenHungery = 70;
     }
 
     /**
@@ -90,7 +91,8 @@ public class Shark extends Carnivore
         incrementHunger();
         if(isAlive()) {
             if(isDay){
-                giveBirth(newSharks);            
+                giveBirth(newSharks);
+                checkAdjacentAnimals();
                 // Move towards a source of food if found.
 
                 Location newLocation = findFood(foodweb);
@@ -127,6 +129,7 @@ public class Shark extends Carnivore
     private void incrementHunger()
     {
         foodLevel--;
+        diseaseHunger();
         if(foodLevel <= 0) {
             setDead();
         }

@@ -54,12 +54,11 @@ public class Human extends Carnivore
         super(male, field, location, islandField);
         if(randomAge) {
             age = rand.nextInt(MAX_AGE);
-            foodLevel = rand.nextInt(50);
         }
         else {
             age = 0;
-            foodLevel = 20;
         }
+        foodLevel = rand.nextInt(40);
 
         whenHungery = 70;
     }
@@ -93,7 +92,8 @@ public class Human extends Carnivore
         Field islandField = getIslandField();
         if(isAlive()) {
             if(isDay){
-                giveBirth(newHumans);            
+                giveBirth(newHumans);
+                checkAdjacentAnimals();
                 // Move towards a source of food if found.
                 Land land = (Land) islandField.getObjectAt(getLocation());
                 if(land.getWeather().getViewDistance() <= EYE_STRENGTH){  
@@ -138,6 +138,7 @@ public class Human extends Carnivore
     private void incrementHunger()
     {
         foodLevel--;
+        diseaseHunger();
         if(foodLevel <= 0) {
             setDead();
         }

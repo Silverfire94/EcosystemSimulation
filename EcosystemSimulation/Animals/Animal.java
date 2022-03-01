@@ -8,6 +8,7 @@ import Utililty.Field;
 import Utililty.Foodweb;
 import Utililty.Location;
 import Utililty.Randomizer;
+import ActOfNature.Disease;
 
 import java.util.Iterator;
 import java.util.ArrayList;
@@ -38,6 +39,8 @@ public abstract class Animal
     protected int foodLevel;
     // The maximum food that an animal can eat
     protected int whenHungery;
+    // This stores a disease
+    protected List<Disease> disease;
     // A shared random number generator to control breeding.
     protected static final Random rand = Randomizer.getRandom();
     /**
@@ -54,6 +57,7 @@ public abstract class Animal
         this.islandField = islandField;
         setLocation(location);
         isWeak = false;
+        disease = new ArrayList<>();
     }
 
     /**
@@ -223,6 +227,54 @@ public abstract class Animal
         return isWeak;
     }
 
+    public void addDisease(Disease givenDisease)
+    {
+        boolean diseaseNotFound = true;
+        for(Disease dis : disease){
+            if(dis.getClass() == givenDisease.getClass()){
+                diseaseNotFound = false;
+            }
+        }
+        if(diseaseNotFound){
+            disease.add(givenDisease);
+            isWeak = true;
+        }
+        
+    }
+    
+    public List<Disease> getDiseases()
+    {
+        return disease;
+    }
+    
+    protected void checkAdjacentAnimals()
+    {
+        Field field = getField();
+        Iterator<Location> it = field.adjacentLocations(getLocation()).iterator();
+        while(it.hasNext()) {
+            Location where = it.next();
+            Object animal = field.getObjectAt(where);
+                if (animal != null && animal.getClass() == this.getClass())
+                {
+                    Animal adjacentAnimal = (Animal) animal;
+                    List<Disease> diseases = new ArrayList<>(adjacentAnimal.getDiseases());
+                    
+                    for(Disease disease : diseases){
+                        if(rand.nextDouble() <= disease.getSpreadProbability()){
+                            addDisease(disease);
+                        }
+                    }
+                }
+        }
+    }
+    
+    protected void diseaseHunger()
+    {
+        for(Disease dis : disease){
+            foodLevel -= dis.getHungerIncrease();
+        }
+    }
+    
     abstract protected Location findFood(Foodweb foodweb);
     
     // protected Location findFood(Foodweb foodweb)

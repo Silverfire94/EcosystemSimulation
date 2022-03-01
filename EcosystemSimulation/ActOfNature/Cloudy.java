@@ -2,18 +2,18 @@ package ActOfNature;
 
 
 /**
- * Write a description of class Cloudy here.
+ * This simulates cloudy weather.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Mark Emmanuel and Vaibhavkumar Patel
+ * @version 2.0
  */
 public class Cloudy extends Weather
 {
-    // instance variables - replace the example below with your own
+    // The ID of the class
     private static int ID = 1;
 
     /**
-     * Constructor for objects of class Cloudy
+     * Constructor for objects of class Cloudy.
      */
     public Cloudy()
     {
@@ -21,10 +21,19 @@ public class Cloudy extends Weather
         growthRate = 1;
     }
 
+    /**
+     * Checks if the given ID is same as the class ID.
+     * @param givenID The ID at the location in the map.
+     * @Return Returns true if the class ID is the same as the givenID.
+     */
      public boolean matchId(int givenId){
         return givenId == ID;
     }
     
+    /**
+     * Creates a new Cloudy object.
+     * @Return Returns a Cloudy object.
+     */
     public Weather createWeather(){
         return new Cloudy();
     }

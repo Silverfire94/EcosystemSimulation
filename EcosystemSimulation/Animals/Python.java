@@ -57,12 +57,11 @@ public class Python extends Carnivore
         super(male, field, location, islandField);
         if(randomAge) {
             age = rand.nextInt(MAX_AGE);
-            foodLevel = rand.nextInt(40);
         }
         else {
             age = 0;
-            foodLevel = 20;
         }
+        foodLevel = rand.nextInt(40);
 
         whenHungery = 60;
     }
@@ -97,7 +96,8 @@ public class Python extends Carnivore
         Field islandField = getIslandField();
         if(isAlive()) {
             if(isDay){
-                giveBirth(newPythons);            
+                giveBirth(newPythons);
+                checkAdjacentAnimals();
                 // Move towards a source of food if found.
                 Location newLocation = findFood(foodweb);
                 Land land = (Land) islandField.getObjectAt(getLocation());
@@ -142,6 +142,7 @@ public class Python extends Carnivore
     private void incrementHunger()
     {
         foodLevel--;
+        diseaseHunger();
         if(foodLevel <= 0) {
             setDead();
         }

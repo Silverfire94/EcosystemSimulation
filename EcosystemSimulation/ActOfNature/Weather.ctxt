@@ -1,14 +1,19 @@
 #BlueJ class context
 comment0.target=Weather
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ Weather\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ This\ simulates\ the\ Weather\ which\ affects\ the\ growth\ rate\ of\ plants\r\n\ and\ how\ well\ the\ animals\ can\ see.\r\n\r\n\ @author\ Mark\ Emmanuel\ &\ Vaibhavkumar\ Patel.\r\n\ @version\ 2.0\r\n
 comment1.params=
 comment1.target=Weather()
+comment1.text=\r\n\ Creates\ a\ Weather\ object.\r\n
 comment2.params=
 comment2.target=int\ getGrowthRate()
+comment2.text=\r\n\ @Return\ How\ fast\ will\ the\ plants\ grow.\r\n
 comment3.params=
 comment3.target=int\ getViewDistance()
+comment3.text=\r\n\ @Return\ How\ visible\ is\ it\ in\ the\ weather.\r\n
 comment4.params=
 comment4.target=Weather\ createWeather()
+comment4.text=\r\n\ This\ creates\ a\ new\ Weather\ object\ of\ the\ subclass\ type.\r\n\ @Return\ The\ new\ weather\ object.\r\n
 comment5.params=givenID
 comment5.target=boolean\ matchId(int)
+comment5.text=\r\n\ This\ checks\ if\ the\ ID\ given\ matches\ the\ ID\ of\ the\ class\r\n\ @param\ givenID\ This\ is\ the\ ID\ at\ the\ location\ in\ the\ map\r\n\ @Return\ Returns\ true\ if\ the\ class\ ID\ is\ the\ same\ as\ the\ givenID\r\n
 numComments=6

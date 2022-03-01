@@ -50,11 +50,8 @@ public class Pig extends Herbivore
         age = 0;
         if(randomAge) {
             age = rand.nextInt(MAX_AGE);
-            foodLevel = rand.nextInt(40);
         }
-        else {
-            foodLevel = 20;
-        }
+        foodLevel = rand.nextInt(40);
         
         whenHungery = 60;
     }
@@ -86,7 +83,8 @@ public class Pig extends Herbivore
         Field islandField = getIslandField();
         if(isAlive()) {
             if(isDay){
-                giveBirth(newPigs);            
+                giveBirth(newPigs);
+                checkAdjacentAnimals();
                 // Move towards a source of food if found.
                 Location newLocation = findFood(foodweb);
                 Land land = (Land) islandField.getObjectAt(getLocation());
@@ -127,6 +125,7 @@ public class Pig extends Herbivore
     private void incrementHunger()
     {
         foodLevel--;
+        diseaseHunger();
         if(foodLevel <= 0) {
             setDead();
         }

@@ -2,7 +2,7 @@ package ActOfNature;
 
 
 /**
- * Write a description of class Sunny here.
+ * This simulates sunny weather.
  *
  * @author (your name)
  * @version (a version number or a date)

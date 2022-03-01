@@ -1,0 +1,19 @@
+#BlueJ class context
+comment0.target=Disease
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ Diesease\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=
+comment1.target=Disease()
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Diesease\r\n
+comment2.params=
+comment2.target=int\ getHungerIncrease()
+comment3.params=
+comment3.target=java.util.List\ getSusceptableAnimals()
+comment4.params=value
+comment4.target=void\ setHungerIncrease(int)
+comment5.params=
+comment5.target=double\ getSpawn()
+comment6.params=
+comment6.target=Disease\ createDisease()
+comment7.params=
+comment7.target=double\ getSpreadProbability()
+numComments=8

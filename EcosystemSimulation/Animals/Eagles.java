@@ -55,12 +55,11 @@ public class Eagles extends Carnivore
         super(male, field, location, islandField);
         if(randomAge) {
             age = rand.nextInt(MAX_AGE);
-            foodLevel = rand.nextInt(30);
         }
         else {
             age = 0;
-            foodLevel = 20;
         }
+        foodLevel = rand.nextInt(30);
 
         whenHungery = 60;
     }
@@ -94,7 +93,8 @@ public class Eagles extends Carnivore
         Field islandField = getIslandField();
         if(isAlive()) {
             if(isDay){
-                giveBirth(newEagles);            
+                giveBirth(newEagles);
+                checkAdjacentAnimals();
                 // Move towards a source of food if found.
 
                 Location newLocation = findFood(foodweb);
@@ -133,6 +133,7 @@ public class Eagles extends Carnivore
     private void incrementHunger()
     {
         foodLevel--;
+        diseaseHunger();
         if(foodLevel <= 0) {
             setDead();
         }

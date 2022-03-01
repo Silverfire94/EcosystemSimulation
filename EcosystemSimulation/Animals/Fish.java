@@ -45,9 +45,12 @@ public class Fish extends Herbivore
     {
         super(male, field, location, islandField);
         age = 0;
-        if(randomAge) {
+         if(randomAge) {
             age = rand.nextInt(MAX_AGE);
         }
+        foodLevel = rand.nextInt(40);
+        
+        whenHungery = 60;
     }
 
     /**
@@ -73,9 +76,11 @@ public class Fish extends Herbivore
     public void act(List<Animal> newFishes, Foodweb foodweb, boolean isDay)
     {
         incrementAge();
+        incrementHunger();
         if(isAlive()) {
             if(isDay){
-                giveBirth(newFishes);            
+                giveBirth(newFishes);
+                checkAdjacentAnimals();
                 // Move towards a source of food if found.
                 Location newLocation = findFood(foodweb);
                 if(newLocation == null) { 
@@ -102,6 +107,18 @@ public class Fish extends Herbivore
     {
         age++;
         if(age > MAX_AGE) {
+            setDead();
+        }
+    }
+    
+    /**
+     * 
+     */
+    private void incrementHunger()
+    {
+        foodLevel--;
+        diseaseHunger();
+        if(foodLevel <= 0){
             setDead();
         }
     }

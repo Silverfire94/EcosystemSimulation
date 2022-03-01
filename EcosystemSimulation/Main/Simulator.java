@@ -16,7 +16,7 @@ import java.util.HashMap;
 
 /**
  * A simple predator-prey simulator, based on a rectangular field
- * containing Pigs and Pythones.
+ * containing animals and plants.
  * 
  * @author David J. Barnes and Michael Kölling
  * @version 2016.02.29 (2)
@@ -43,6 +43,8 @@ public class Simulator
     private List<Land> landTypes; 
     // List of WeatherTypes in the islandField.
     private List<Weather> weatherTypes;
+    // List of DiseaseTypes in the field.
+    private List<Disease> diseaseTypes;
     //----------------------------------------//
     // The food web of the ecosystem
     private Foodweb foodweb;
@@ -59,8 +61,9 @@ public class Simulator
     // A graphical view of the simulation.
     private SimulatorView view;
 
-    private HashMap<Land, Location> x;
-
+    /**
+     * This runs a long simulation when run.
+     */
     public static void main(String [] args){
         Simulator simulator = new Simulator(100, 100);
         simulator.runLongSimulation();
@@ -88,12 +91,14 @@ public class Simulator
             width = DEFAULT_WIDTH;
         }
 
+        // Initializing the instance fields
         animals = new ArrayList<>();
         animalTypes = new ArrayList<>();
         plantTypes = new ArrayList<>();
         lands = new ArrayList<>();
         landTypes = new ArrayList<>();
         weatherTypes = new ArrayList<>();
+        diseaseTypes = new ArrayList<>();
         
         field = new Field(depth, width);
         islandField = new Field(depth, width);
@@ -101,22 +106,25 @@ public class Simulator
 
         // Create a view of the state of each location in the field.
         view = new SimulatorView(depth, width);
+        
+        // Sets the colour for each animal
         view.setColor(Pig.class, Color.PINK);
         view.setColor(Python.class, Color.YELLOW);
         view.setColor(Human.class, Color.black);
         view.setColor(Eagles.class, Color.MAGENTA);
         view.setColor(Fish.class, Color.ORANGE);
         view.setColor(Shark.class, Color.red);
-        // land 
+        // Sets the colour for each land 
         view.setColor(Water.class, Color.BLUE); 
         view.setColor(Ground.class, new Color(150,75,0));
         view.setColor(ShallowWater.class, Color.CYAN);
         
-        // plants 
+        // Sets the colour for each plants 
         view.setColor(Grass.class, Color.GREEN);
         view.setColor(Seaweed.class, new Color(0, 0, 0, 0));
         
-        // weather - Change the Alpha value to see the clouds and the rainy cloud.
+        // Sets the colour for each weather
+        // Change the Alpha value to see the clouds and the rainy cloud.
         view.setColor(Raining.class, new Color(15, 15, 15, 40));
         view.setColor(Cloudy.class, new Color(128, 128, 128, 20));
         view.setColor(Sunny.class, new Color(0,0,0,0));
@@ -142,6 +150,9 @@ public class Simulator
         weatherTypes.add(new Sunny());
         weatherTypes.add(new Cloudy());
         weatherTypes.add(new Raining());
+        
+        // Puting all disease types in the disease types array.
+        diseaseTypes.add(new Pigomenalla());
         
         // Creating a new foodweb
         foodweb = new Foodweb();
@@ -180,12 +191,11 @@ public class Simulator
     public void simulateOneStep()
     {
         step++;
-        int day = 5;
-        //boolean isDay = (step % 2) > 0;
+        int day = 5; // This sets the number of steps in the day
 
         // Provide space for newborn animals.
         List<Animal> newAnimals = new ArrayList<>();        
-        // Let all Pythons act.
+        // Let all the animals act.
         for(Iterator<Animal> it = animals.iterator(); it.hasNext(); ) {
             Animal animal = it.next();
             animal.act(newAnimals, foodweb, Time.isDay(day, step));
@@ -194,6 +204,7 @@ public class Simulator
             }
         }
         
+        // Let all the plants act.
         for(Iterator<Land> it = lands.iterator(); it.hasNext(); ) {
             Land land = it.next();
             if(land.getPlant() != null){
@@ -201,10 +212,12 @@ public class Simulator
             }
         }
         
+        // This simulates how the weather changes
         if(Time.isDay2(10,step)){
             simulateWeather();
         }
-        // Add the newly born Pythones and Pythons to the main lists.
+        
+        // Add the newly born animals to the animal list.
         animals.addAll(newAnimals);
         view.showStatus(step/day*2, field, islandField);
     }
@@ -217,17 +230,20 @@ public class Simulator
         step = 0;
         animals.clear();
         lands.clear();
+        
+        // These methods create the objects used the ecosystem
         drawLand();
         populatePlants();
         populate();
         simulateWeather();
+        simulateDisease();
 
         // Show the starting state in the view.
         view.showStatus(step, field, islandField);
     }
 
     /**
-     * Randomly populate the field with Pythones and Pythons.
+     * Randomly populate the field with animals.
      */
     private void populate()
     {
@@ -253,6 +269,33 @@ public class Simulator
         }
     }
     
+    /**
+     * 
+     */
+    private void simulateDisease()
+    {
+        Random rand = Randomizer.getRandom();
+        for(int row = 0; row < field.getDepth(); row++) {
+            for(int col = 0; col < field.getWidth(); col++) {
+                //returns a random animal object.
+                Object animal = field.getObjectAt(row ,col);
+                Disease disease = diseaseTypes.get(rand.nextInt(diseaseTypes.size()));
+                List<Class> animals = disease.getSusceptableAnimals();
+                for(Class animalType : animals)
+                if(animal != null && animal.getClass() == animalType){
+                    Animal currentAnimal = (Animal) animal;
+                    if(rand.nextDouble() <= disease.getSpawn()){
+                        currentAnimal.addDisease(disease.createDisease());
+                    }
+                }
+                
+            }
+        }
+    }
+    
+    /**
+     * Populates the islandField with plants.
+     */
     private void populatePlants()
     {
         Random rand = Randomizer.getRandom();
@@ -284,7 +327,7 @@ public class Simulator
     }
 
     /**
-     * Maybe can merge with the method above.
+     * Creates land objects in the islandField.
      */
     private void drawLand()
     {
@@ -303,6 +346,9 @@ public class Simulator
         }
     }
    
+    /**
+     * This sets the weather for each land object.
+     */
     private void simulateWeather()
     {
         int [][] weatherMap = map.GenerateMap();
@@ -343,7 +389,6 @@ public class Simulator
             // }
         // }
     // }
-
     /**
      * Pause for a given time.
      * @param millisec  The time to pause for, in milliseconds
