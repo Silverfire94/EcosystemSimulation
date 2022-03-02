@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=Raining
+comment0.text=\r\n\ This\ class\ simulates\ raining.\r\n\r\n\ @author\ Mark\ Emmanuel\ and\ Vaibhavkumar\ Patel\r\n\ @version\ 2.0\r\n
+comment1.params=
+comment1.target=Raining()
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Raining.\r\n
+comment2.params=givenId
+comment2.target=boolean\ matchId(int)
+comment2.text=\r\n\ Checks\ if\ the\ given\ ID\ is\ same\ as\ the\ class\ ID.\r\n\ @param\ givenID\ The\ ID\ at\ the\ location\ in\ the\ map.\r\n\ @Return\ Returns\ true\ if\ the\ class\ ID\ is\ the\ same\ as\ the\ givenID.\r\n
+comment3.params=
+comment3.target=Weather\ createWeather()
+comment3.text=\r\n\ Creates\ a\ new\ Raining\ object.\r\n\ @Return\ Returns\ a\ Raining\ object.\r\n
+numComments=4
