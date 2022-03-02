@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=Foodweb
+comment0.text=\r\n\ This\ class\ maps\ all\ the\ animals\ and\ what\ they\ eat.\ \r\n\ \r\n\ @author\ Vaihbavkumar\ patel(k21076223)\ and\ mark\ emmanuel(k21009638).\r\n\ @version\ (3)\ 2022.03.01.\r\n
+comment1.params=
+comment1.target=Foodweb()
+comment1.text=\r\n\ Constructor\ for\ creating\ Foodweb\ objects.\r\n
+comment2.params=animalType
+comment2.target=java.util.List\ getFood(java.lang.Class)
+comment2.text=\r\n\ This\ gives\ us\ a\ list\ of\ organisms\ that\ the\ animal\ can\ eat.\r\n\ @param\ animalType\ The\ class\ of\ the\ animal,\ whose\ prey\ we\ want.\r\n\ @Return\ List\ of\ classes\ that\ are\ prey\ to\ the\ animal.\r\n
+numComments=3

@@ -1,0 +1,25 @@
+#BlueJ class context
+comment0.target=Seaweed
+comment0.text=\r\n\ This\ simulates\ how\ Seaweed\ acts\ in\ the\ simulation.\r\n\r\n\ @author\ Vaihbavkumar\ patel(k21076223)\ and\ mark\ emmanuel(k21009638).\r\n\ @version\ (3)\ 2022.03.01.\r\n
+comment1.params=randomSize\ location
+comment1.target=Seaweed(boolean,\ Utility.Location)
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Seaweed.\r\n\ @param\ randomsize\ If\ the\ plant\ is\ spawned\ in\ with\ random\ size\ or\ not.\r\n\ @param\ Location\ the\ plants\ location\ \r\n
+comment2.params=
+comment2.target=Seaweed()
+comment2.text=\r\n\ A\ dummy\ constructor.\r\n
+comment3.params=randomSize\ location
+comment3.target=Plant\ createPlant(boolean,\ Utility.Location)
+comment3.text=\r\n\ This\ creates\ new\ grass.\r\n\ @param\ randomSize\ True\ if\ the\ size\ should\ be\ random.\r\n\ @param\ location\ The\ location\ where\ the\ plant\ will\ be\ stored\ at.\r\n\ @Return\ The\ new\ Grass\ object.\r\n
+comment4.params=isDay\ islandField
+comment4.target=void\ act(boolean,\ Utility.Field)
+comment4.text=\r\n\ This\ method\ is\ for\ the\ actions\ taken\ by\ the\ plant\r\n\ during\ each\ step.\r\n\ @param\ isDay\ True\ if\ it\ is\ dayTime.\r\n\ @param\ islandField\ The\ field\ in\ which\ the\ plant\ is\ stored\ in.\ \r\n
+comment5.params=
+comment5.target=void\ grow()
+comment5.text=\r\n\ This\ allow\ the\ size\ of\ the\ seaweed\ to\ increase\r\n\ until\ it\ is\ above\ the\ growthLimit.\r\n
+comment6.params=
+comment6.target=void\ setSmall()
+comment6.text=\r\n\ Indicate\ that\ the\ plant\ is\ no\ longer\ big\r\n
+comment7.params=
+comment7.target=double\ getSpawn()
+comment7.text=\r\n\ @Return\ The\ spawn\ probability\ of\ seaweed.\r\n
+numComments=8

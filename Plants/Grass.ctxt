@@ -1,0 +1,25 @@
+#BlueJ class context
+comment0.target=Grass
+comment0.text=\r\n\ This\ simulates\ how\ grass\ acts\ in\ the\ simulation.\r\n\r\n\ @author\ Vaihbavkumar\ patel(k21076223)\ and\ mark\ emmanuel(k21009638).\r\n\ @version\ (3)\ 2022.03.01.\r\n
+comment1.params=randomSize\ location
+comment1.target=Grass(boolean,\ Utility.Location)
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Grass\r\n
+comment2.params=
+comment2.target=Grass()
+comment2.text=\r\n\ A\ dummy\ constuctor.\r\n
+comment3.params=
+comment3.target=double\ getSpawn()
+comment3.text=\r\n\ @Return\ The\ spawn\ probability\ of\ grass\r\n
+comment4.params=randomSize\ location
+comment4.target=Plant\ createPlant(boolean,\ Utility.Location)
+comment4.text=\r\n\ This\ creates\ new\ grass\r\n\ @Return\ The\ new\ Grass\ object\r\n
+comment5.params=isDay\ islandField
+comment5.target=void\ act(boolean,\ Utility.Field)
+comment5.text=\r\n\ Checks\ if\ it\ is\ daytime\ before\ growing\ the\ plant.\r\n\ Additionally\ checks\ the\ weather\ at\ that\ location\ and\ changes\ the\ growth\ rate.\r\n\ \r\n\ @param\ isDay\ True\ if\ it\ is\ daytime.\r\n\ @param\ islandField\ The\ field\ in\ which\ the\ plant\ is\ stored\ in.\r\n
+comment6.params=
+comment6.target=void\ grow()
+comment6.text=\r\n\ This\ allow\ the\ size\ of\ the\ grass\ to\ increase\r\n\ until\ it\ is\ above\ the\ growthLimit.\r\n
+comment7.params=
+comment7.target=void\ setSmall()
+comment7.text=\r\n\ Indicate\ that\ the\ plant\ is\ no\ longer\ big.\r\n
+numComments=8

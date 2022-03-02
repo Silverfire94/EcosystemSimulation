@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=Time
+comment0.text=\r\n\ Used\ to\ define\ methods\ for\ describing\ Time.\r\n\r\n\ @author\ Mark\ Emmanuel\ and\ Vaibhavkumar\ Patel\r\n\ @version\ 2.0\r\n
+comment1.params=
+comment1.target=Time()
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Time\r\n
+comment2.params=dayLengthInSteps\ steps
+comment2.target=boolean\ isDay(int,\ int)
+comment2.text=\r\n\ @param\ dayLengthInSteps\ How\ long\ we\ want\ daylight\ hours\ to\ be.\r\n\ @param\ steps\ The\ total\ number\ of\ steps\ that\ has\ occurered.\r\n\ @Return\ True\ if\ it\ is\ dayTime.\r\n
+comment3.params=dayLengthInStep\ steps
+comment3.target=boolean\ isDay2(int,\ int)
+comment3.text=\r\n\ @param\ dayLengthInSteps\ How\ long\ we\ want\ a\ day\ to\ be.\r\n\ @param\ steps\ The\ total\ number\ of\ steps\ that\ has\ occurered.\r\n\ @Return\ True\ if\ a\ whole\ day\ has\ passed.\r\n
+numComments=4

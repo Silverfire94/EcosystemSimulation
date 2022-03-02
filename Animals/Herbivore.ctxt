@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=Herbivore
+comment0.text=\r\n\ \r\n\ This\ class\ models\ specific\ methods\ and\ attributes\ only\ \r\n\ related\ to\ the\ carnivore's\ in\ the\ simulation.\r\n\r\n\ @author\ Vaibhavkumar\ Patel\ (k21076223)\ and\ mark\ Emmanuel(k21009628)\r\n\ @version\ 2022.03.01\r\n
+comment1.params=male\ animalfield\ location\ islandField
+comment1.target=Herbivore(boolean,\ Utility.Field,\ Utility.Location,\ Utility.Field)
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ herbivore\r\n
+comment2.params=
+comment2.target=Herbivore()
+comment2.text=\r\n\ Dummy\ constructor\r\n
+comment3.params=foodweb
+comment3.target=Utility.Location\ findFood(Utility.Foodweb)
+comment3.text=\r\n\ This\ method\ is\ used\ to\ find\ the\ location\ of\ the\ for\ a\ herbivore.\r\n\ @param\ foodweb\ is\ foodweb\ object\ that\ has\ the\ info\ about\ the\ food\ the\ herbivore\ can\ eat.\r\n\ @return\ the\ location\ of\ the\ food.\r\n
+numComments=4
